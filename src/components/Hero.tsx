@@ -72,26 +72,13 @@ export default function Hero() {
   return (
     <section className="relative w-full bg-[#0B0B0F] text-left overflow-hidden border-b border-white/5 py-16 lg:py-24 px-6">
       
-      {/* 🔮 ব্যাকগ্রাউন্ডে ফেস ব্লেন্ডিং এবং মোশন ইফেক্ট */}
+      {/* 🔮 ব্যাকগ্রাউন্ড গ্লো এবং মোশন ইফেক্ট */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        
-        {/* 👉 কাস্টম ব্যাকগ্রাউন্ড ফেস ইমেজ (profile 2.jpg) - Opacity 30% */}
-        <div 
-          className="absolute right-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] opacity-30 z-0 select-none bg-no-repeat"
-          style={{
-            backgroundImage: "url('/profile 2.jpg')",
-            backgroundSize: 'contain',
-            backgroundPosition: 'right top',
-            WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)',
-            maskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)',
-          }}
-        />
-
-        {/* গ্লো ইফেক্টস */}
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#A855F7]/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#00F5FF]/10 rounded-full blur-[120px]" />
+        <div className="absolute top-[20%] right-[15%] w-[300px] h-[300px] bg-[#A855F7]/5 rounded-full blur-[90px]" />
 
-        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg">
           <motion.circle 
             cx="20%" cy="30%" r="180" 
             stroke="url(#heroPurpleGradient)" strokeWidth="1" strokeDasharray="4 4" fill="none"
@@ -117,21 +104,48 @@ export default function Hero() {
             </linearGradient>
           </defs>
         </svg>
+
+        {/* পার্টিকলস */}
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: Math.random() * 4 + 3 + 'px',
+              height: Math.random() * 4 + 3 + 'px',
+              backgroundColor: i % 2 === 0 ? '#A855F7' : '#00F5FF',
+              boxShadow: i % 2 === 0 ? '0 0 8px #A855F7' : '0 0 8px #00F5FF',
+              left: i < 5 ? Math.random() * 40 + '%' : Math.random() * 40 + 55 + '%',
+              top: Math.random() * 80 + 10 + '%',
+              opacity: 0.5
+            }}
+            animate={{
+              y: [0, Math.random() * -50 - 20, 0],
+              opacity: [0.4, 0.8, 0.4]
+            }}
+            transition={{
+              duration: Math.random() * 6 + 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5
+            }}
+          />
+        ))}
       </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
-        {/* 📸 বাম পাশ: লোগো অরবিট ফ্রেম */}
+        {/* 📸 বাম পাশ: লোগো অরবিট এবং প্রোফাইল সার্কেল ফ্রেম (পিসি ভিউ অপরিবর্তিত) */}
         <div className="lg:col-span-5 w-full max-w-[360px] lg:max-w-none mx-auto relative flex items-center justify-center min-h-[380px] order-last lg:order-first">
           <div className="absolute w-[280px] h-[280px] bg-gradient-to-r from-[#A855F7]/10 to-[#00F5FF]/10 rounded-full blur-3xl" />
           <div className="absolute w-[310px] h-[310px] rounded-full border border-white/5 border-dashed pointer-events-none" />
 
-          {/* মেইন প্রোফাইল সার্কেল ছবি (এখানেও আমরা profile 2.jpg ব্যবহার করছি) */}
+          {/* মেইন ছবি (পিসি ফরম্যাটের জন্য পূর্বের স্থানে ঠিক রাখা হয়েছে) */}
           <div className="relative w-[240px] h-[240px] lg:w-[280px] lg:h-[280px] rounded-full border border-white/10 overflow-hidden shadow-2xl bg-[#12121A] z-10 group">
             <img 
-              src="/profile 2.jpg" 
+              src="/ankur-profile.png" 
               alt="Ankur Biswas"
-              className="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
             />
           </div>
 
@@ -168,21 +182,36 @@ export default function Hero() {
         {/* ✍️ ডান পাশ: টেক্সট কন্টেন্ট */}
         <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left relative z-10">
           
-          {/* হেডলাইন সেকশন (মোবাইলে এর ঠিক পেছনেই ৩০% অপাসিটিতে ফেস ব্যাকগ্রাউন্ড থাকবে) */}
-          <div className="relative inline-block h-auto">
+          {/* 🎯 মোবাইল রেসপন্সিভ কাস্টম মার্কড এরিয়া বক্স */}
+          <div className="relative p-1 rounded-2xl overflow-hidden group">
+            
+            {/* 👉 শুধুমাত্র মোবাইলে হেডলাইন ও প্যারাগ্রাফের ব্যাকগ্রাউন্ডে ছবি শো করবে (৩০% অপাসিটি এবং স্মুথ ব্লেন্ডিং) */}
+            <div 
+              className="absolute inset-0 block lg:hidden opacity-30 pointer-events-none select-none bg-no-repeat z-0"
+              style={{
+                backgroundImage: "url('/profile 2.jpg')",
+                backgroundSize: 'cover',
+                backgroundPosition: 'center 20%',
+                WebkitMaskImage: 'radial-gradient(circle at center, black 45%, transparent 85%)',
+                maskImage: 'radial-gradient(circle at center, black 45%, transparent 85%)',
+              }}
+            />
+
+            {/* হেডলাইন */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight uppercase relative z-10">
               Bold Brands.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A855F7] to-[#00F5FF]">
                 Sharp Execution.
               </span>
             </h1>
-          </div>
 
-          {/* প্যারাগ্রাফ সেকশন (এখানে ইমেজ ওভারল্যাপ করবে না) */}
-          <p className="mt-6 text-gray-400 text-base md:text-lg max-w-xl lg:max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed relative z-10">
-            Elevating visionary companies with impactful design solutions that capture attention and drive automated growth results.
+            {/* প্যারাগ্রাফ */}
+            <p className="mt-6 text-gray-400 text-base md:text-lg max-w-xl lg:max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed relative z-10">
+              Elevating visionary companies with impactful design solutions that capture attention and drive automated growth results.
           </p>
+          </div>
           
+          {/* বাটন (বক্সের বাইরে রাখা হয়েছে যাতে মোবাইল রেসপন্সে মার্ক করা এরিয়া পারফেক্ট থাকে) */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
             <a href="#portfolio" className="inline-flex items-center justify-center gap-2 bg-[#0B0B0F] border border-[#A855F7]/40 text-white font-medium px-8 py-3.5 rounded-full hover:bg-[#A855F7] hover:border-[#00F5FF] transition uppercase tracking-wider text-sm">
               See My Work 
