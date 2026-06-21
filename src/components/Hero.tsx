@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-// ৫টি সফটওয়্যার ও স্কিলের হাই-কোয়ালিটি SVG লোগো ডাটা
+// ৫টি সফটওয়্যার ও স্কিলের হাই-কোয়ালিটি SVG লোগো ডাটা (মোশন স্লো করার জন্য duration বাড়ানো হয়েছে)
 const techLogos = [
   {
     name: "Photoshop",
@@ -13,6 +13,7 @@ const techLogos = [
       </svg>
     ),
     delay: 0,
+    duration: 28 // ২৪ থেকে ৩০ সেকেন্ড দিলে ঘূর্ণন একদম স্মুথ ও স্লো দেখাবে
   },
   {
     name: "Premiere Pro",
@@ -22,20 +23,23 @@ const techLogos = [
         <text x="5" y="16.5" fill="#EA77FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Pr</text>
       </svg>
     ),
-    delay: 3.2,
+    delay: 5.6,
+    duration: 28
   },
   {
     name: "CapCut",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#FFFFFF]">
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#00F5FF]" fill="none">
         <rect width="24" height="24" rx="4" fill="#000000" stroke="#FFFFFF" strokeWidth="1"/>
-        <path d="M6 6h4v4H6z" fill="#00F5FF"/>
-        <path d="M14 14h4v4h-4z" fill="#FFFFFF"/>
-        <path d="M6 14h4v4H6z" fill="#FFFFFF"/>
-        <path d="M14 6h4v4h-4z" fill="#00F5FF"/>
+        {/* অফিশিয়াল ক্যাপকাট লোগো শেপ */}
+        <path d="M7 7h3v3H7z" fill="#00F5FF"/>
+        <path d="M14 14h3v3h-3z" fill="#FFFFFF"/>
+        <path d="M7 12.5a1.5 1.5 0 0 1 1.5-1.5h4a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-3z" stroke="#00F5FF" strokeWidth="1.5"/>
+        <path d="M9.5 7.5a1.5 1.5 0 0 1 1.5-1.5h4a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-4a1.5 1.5 0 0 1-1.5-1.5v-3z" stroke="#FFFFFF" strokeWidth="1.5"/>
       </svg>
     ),
-    delay: 6.4,
+    delay: 11.2,
+    duration: 28
   },
   {
     name: "GoHighLevel",
@@ -46,30 +50,30 @@ const techLogos = [
         <circle cx="12" cy="11" r="1.5" fill="#FFFFFF" />
       </svg>
     ),
-    delay: 9.6,
+    delay: 16.8,
+    duration: 28
   },
   {
-    name: "AI",
+    name: "Illustrator",
     svg: (
-      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_15px_#A855F7]" fill="none">
-        <rect width="24" height="24" rx="4" fill="#0F172A" stroke="#A855F7" strokeWidth="1.5"/>
-        <path d="M12 6v12M6 12h12M9 9l6 6M15 9l-6 6" stroke="#00F5FF" strokeWidth="1.5" strokeLinecap="round"/>
-        <circle cx="12" cy="12" r="3" fill="#A855F7"/>
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#FF9A00]" fill="#331C00">
+        <rect width="24" height="24" rx="4" fill="#331C00" stroke="#FF9A00" strokeWidth="1.5"/>
+        <text x="6" y="16.5" fill="#FF9A00" fontSize="11" fontWeight="bold" fontFamily="Arial">Ai</text>
       </svg>
     ),
-    delay: 12.8,
+    delay: 22.4,
+    duration: 28
   }
 ];
 
 export default function Hero() {
-  // ম্যানুয়াল সেফ পাথ ডেটা (কোণের হিসাব ছাড়াই ৩৬০ ডিগ্রী ঘূর্ণন ট্র্যাক)
   const xPath = [165, 133, 50, -50, -133, -165, -133, -50, 50, 133, 165];
   const yPath = [0, 96, 156, 156, 96, 0, -96, -156, -156, -96, 0];
 
   return (
     <section className="relative w-full bg-[#0B0B0F] text-left overflow-hidden border-b border-white/5 py-16 lg:py-24 px-6">
       
-      {/* 🔮 ব্যাকগ্রাউন্ডে মোশন গ্রাফিক্স */}
+      {/* 🔮 ব্যাকগ্রাউন্ড মোশন গ্রাফিক্স */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#A855F7]/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#00F5FF]/10 rounded-full blur-[120px]" />
@@ -146,7 +150,7 @@ export default function Hero() {
             />
           </div>
 
-          {/* 🌟 লোগোসমূহ নির্দিষ্ট ট্র্যাকে ঘুরবে */}
+          {/* 🌟 লোগোসমূহ নির্দিষ্ট ট্র্যাকে স্লো মোশনে ঘুরবে */}
           {techLogos.map((logo, index) => (
             <motion.div
               key={index}
@@ -156,7 +160,7 @@ export default function Hero() {
                 y: yPath,
               }}
               transition={{
-                duration: 16,
+                duration: logo.duration,
                 repeat: Infinity,
                 ease: "linear",
                 delay: logo.delay,
@@ -165,7 +169,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{
-                  duration: 2.5 + (index % 2),
+                  duration: 3 + (index % 2),
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
