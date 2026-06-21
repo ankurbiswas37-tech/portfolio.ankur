@@ -8,8 +8,8 @@ const targetProjects = [
     title: "BRAND IDENTITY", 
     category: "Visual Systems & Strategy", 
     tag: "BRANDING",
-    // 🎨 আপনার নতুন ব্র্যান্ড আইডেন্টিটি ইমেজ পাথ
-    image: "/portfolio/brand_identity.png", 
+    // 🎨 public ফোল্ডারে ঠিক যেভাবে আছে
+    image: "/brand identity.png", 
     subDesc: "Premium logos, corporate guidelines, and cohesive design assets built for Neon Hippo." 
   },
   { 
@@ -17,8 +17,8 @@ const targetProjects = [
     title: "VIDEO EDITING", 
     category: "Ads & High-Retention Cuts", 
     tag: "VIDEO EDITING",
-    // 🎬 আপনার নতুন ভিডিও এডিটিং পোর্টফোলিও ইমেজ পাথ
-    image: "/portfolio/video_editing.png", 
+    // 🎬 public ফোল্ডারে ঠিক যেভাবে আছে
+    image: "/video editing.png", 
     subDesc: "Engaging commercial ads, podcasts, and viral short-form contents built with precision." 
   },
   { 
@@ -26,8 +26,8 @@ const targetProjects = [
     title: "DIGITAL DESIGN", 
     category: "Social Assets & UI Artifacts", 
     tag: "DIGITAL DESIGN",
-    // 💻 আপনার নতুন ডিজিটাল ডিজাইন ইমেজ পাথ
-    image: "/portfolio/digital_design.png", 
+    // 💻 public ফোল্ডারে ঠিক যেভাবে আছে
+    image: "/digital design.png", 
     subDesc: "High-end social media assets, marketing web pages, and custom digital assets." 
   },
   { 
@@ -35,8 +35,8 @@ const targetProjects = [
     title: "GHL FUNNEL BUILDER", 
     category: "Marketing Automation Systems", 
     tag: "FUNNEL & CRM",
-    // 🚀 আপনার নতুন জিএইচএল ফানেল বিল্ড ইমেজ পাথ
-    image: "/portfolio/ghl_funnel.png", 
+    // 🚀 public ফোল্ডারে ঠিক যেভাবে আছে (বড় হাতের GHL এবং স্পেস সহ)
+    image: "/GHL funnel Build.png", 
     subDesc: "High-converting GoHighLevel landing pages, SaaS sub-account setup, and triggers." 
   },
 ];
@@ -45,7 +45,7 @@ export default function PortfolioGrid() {
   return (
     <section className="w-full py-24 bg-[#0B0B0F] px-6" id="portfolio">
       
-      {/* টেক্সট হেডলাইন সেকশন (Our থেকে My তে পরিবর্তিত) */}
+      {/* টেক্সট হেডলাইন সেকশন */}
       <div className="max-w-7xl mx-auto text-center mb-16">
         <span className="text-xs font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon uppercase">
           My Creative Workspace
@@ -72,7 +72,7 @@ export default function PortfolioGrid() {
             {/* প্রিভিউ বক্স এরিয়া উইথ ইমেজ */}
             <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden transition group-hover:border-brand-purple/20">
               
-              {/* নির্দিষ্ট কাজের মকআপ ইমেজ (হাই অপাসিটি ০.৬৫) */}
+              {/* নির্দিষ্ট কাজের মকআপ ইমেজ */}
               <img 
                 src={project.image} 
                 alt={project.title}
@@ -80,7 +80,7 @@ export default function PortfolioGrid() {
                 loading="lazy"
               />
 
-              {/* হোভার করলে গ্লোয়িং ব্লার লেয়ার ও অ্যাকশন বাটন আসবে */}
+              {/* হোভার ইফেক্ট */}
               <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/10 via-[#0B0B0F]/40 to-[#0B0B0F]/80 opacity-0 group-hover:opacity-100 transition duration-300 z-10 flex items-center justify-center backdrop-blur-[1px]">
                 <span className="bg-[#0B0B0F]/95 text-white text-[11px] font-bold px-4 py-2 rounded border border-white/10 tracking-widest uppercase inline-flex items-center gap-1.5 shadow-lg">
                   View Work Samples
