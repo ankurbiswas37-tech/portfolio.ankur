@@ -8,8 +8,8 @@ const targetProjects = [
     title: "BRAND IDENTITY", 
     category: "Visual Systems & Strategy", 
     tag: "BRANDING",
-    // 🎨 লোগো মকআপ থিম (Minimal Premium Logo Mockup)
-    image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=600&auto=format&fit=crop", 
+    // 🎨 আপনার নতুন ব্র্যান্ড আইডেন্টিটি ইমেজ পাথ
+    image: "/portfolio/brand_identity.png", 
     subDesc: "Premium logos, corporate guidelines, and cohesive design assets built for Neon Hippo." 
   },
   { 
@@ -17,8 +17,8 @@ const targetProjects = [
     title: "VIDEO EDITING", 
     category: "Ads & High-Retention Cuts", 
     tag: "VIDEO EDITING",
-    // 🎬 ল্যাপটপ স্ক্রিনে প্রিমিয়ার প্রো এডিটিং প্রোজেক্ট (Premiere Pro Workspace on Laptop Screen)
-    image: "https://images.unsplash.com/photo-1621528850026-0879e42aa15a?q=80&w=600&auto=format&fit=crop", 
+    // 🎬 আপনার নতুন ভিডিও এডিটিং পোর্টফোলিও ইমেজ পাথ
+    image: "/portfolio/video_editing.png", 
     subDesc: "Engaging commercial ads, podcasts, and viral short-form contents built with precision." 
   },
   { 
@@ -26,8 +26,8 @@ const targetProjects = [
     title: "DIGITAL DESIGN", 
     category: "Social Assets & UI Artifacts", 
     tag: "DIGITAL DESIGN",
-    // 💻 সোশ্যাল মিডিয়া পোস্ট মকআপ গ্রিড (Social Media Post Layout Mockup)
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=600&auto=format&fit=crop", 
+    // 💻 আপনার নতুন ডিজিটাল ডিজাইন ইমেজ পাথ
+    image: "/portfolio/digital_design.png", 
     subDesc: "High-end social media assets, marketing web pages, and custom digital assets." 
   },
   { 
@@ -35,8 +35,8 @@ const targetProjects = [
     title: "GHL FUNNEL BUILDER", 
     category: "Marketing Automation Systems", 
     tag: "FUNNEL & CRM",
-    // 🚀 ল্যান্ডিং পেজ এবং ফানেল ইউআই মকআপ (Landing Page / Funnel UI Mockup)
-    image: "https://images.unsplash.com/photo-1547119957-637f8679db1e?q=80&w=600&auto=format&fit=crop", 
+    // 🚀 আপনার নতুন জিএইচএল ফানেল বিল্ড ইমেজ পাথ
+    image: "/portfolio/ghl_funnel.png", 
     subDesc: "High-converting GoHighLevel landing pages, SaaS sub-account setup, and triggers." 
   },
 ];
@@ -45,16 +45,16 @@ export default function PortfolioGrid() {
   return (
     <section className="w-full py-24 bg-[#0B0B0F] px-6" id="portfolio">
       
-      {/* টেক্সট হেডলাইন সেকশন */}
+      {/* টেক্সট হেডলাইন সেকশন (Our থেকে My তে পরিবর্তিত) */}
       <div className="max-w-7xl mx-auto text-center mb-16">
         <span className="text-xs font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon uppercase">
-          Our Creative Workspace
+          My Creative Workspace
         </span>
         <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mt-3">
-          EXPLORE OUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon">EXPERT FIELDS</span>
+          EXPLORE MY <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon">EXPERT FIELDS</span>
         </h2>
         <p className="text-gray-400 text-sm md:text-base mt-3 max-w-xl mx-auto font-light leading-relaxed">
-          Click on any domain below to view our complete design case studies, high-converting funnel automations, and premium video production assets.
+          Click on any domain below to view my complete design case studies, high-converting funnel automations, and premium video production assets.
         </p>
       </div>
 
@@ -95,7 +95,7 @@ export default function PortfolioGrid() {
             <h3 className="text-white font-black text-lg tracking-wide uppercase transition group-hover:text-brand-purple">{project.title}</h3>
             <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
             
-            {/* সাব-হেডライン/ডেসক্রিপশন */}
+            {/* সাব-হেডলাইন/ডেসক্রিপশন */}
             <p className="text-gray-400 text-xs mt-2.5 leading-relaxed font-normal normal-case">
               {project.subDesc}
             </p>
