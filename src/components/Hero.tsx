@@ -6,37 +6,34 @@ import { motion } from 'framer-motion';
 const techLogos = [
   {
     name: "Photoshop",
-    // Ps Blue Icon
     svg: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#00C8FF]" fill="#001E36">
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#00C8FF]" fill="#001E36">
         <rect width="24" height="24" rx="4" fill="#001E36" stroke="#00C8FF" strokeWidth="1.5"/>
         <text x="5" y="16.5" fill="#00C8FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Ps</text>
       </svg>
     ),
     delay: 0,
-    radiusX: 130, // ডানে-বামে ঘোরার ব্যাসার্ধ
-    radiusY: 50,  // ওপর-নিচে থ্রিডি বাঁকানোর ব্যাসার্ধ
+    radiusX: 140, 
+    radiusY: 60,  
     duration: 15
   },
   {
     name: "Premiere Pro",
-    // Pr Purple Icon
     svg: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#EA77FF]" fill="#2D003E">
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#EA77FF]" fill="#2D003E">
         <rect width="24" height="24" rx="4" fill="#2D003E" stroke="#EA77FF" strokeWidth="1.5"/>
         <text x="5" y="16.5" fill="#EA77FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Pr</text>
       </svg>
     ),
     delay: 3,
-    radiusX: 140,
-    radiusY: -40,
+    radiusX: 150,
+    radiusY: -50,
     duration: 18
   },
   {
     name: "CapCut",
-    // Capcut Stylized Vector
     svg: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#FFFFFF]">
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#FFFFFF]">
         <rect width="24" height="24" rx="4" fill="#000000" stroke="#FFFFFF" strokeWidth="1"/>
         <path d="M6 6h4v4H6z" fill="#00F5FF"/>
         <path d="M14 14h4v4h-4z" fill="#FFFFFF"/>
@@ -45,30 +42,28 @@ const techLogos = [
       </svg>
     ),
     delay: 6,
-    radiusX: -135,
-    radiusY: 45,
+    radiusX: -140,
+    radiusY: 55,
     duration: 16
   },
   {
     name: "GoHighLevel",
-    // GHL Custom Funnel/Automation Icon
     svg: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#2A85FF]" fill="none">
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_12px_#2A85FF]" fill="none">
         <rect width="24" height="24" rx="4" fill="#1E293B" stroke="#2A85FF" strokeWidth="1.5"/>
         <path d="M7 7h10v2L13 14v4l-2 2v-6L7 9V7z" fill="#2A85FF"/>
         <circle cx="12" cy="11" r="1.5" fill="#FFFFFF" />
       </svg>
     ),
     delay: 9,
-    radiusX: -145,
-    radiusY: -55,
+    radiusX: -150,
+    radiusY: -60,
     duration: 20
   },
   {
     name: "AI",
-    // AI Cyber Glow Tech Icon
     svg: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_12px_#A855F7]" fill="none">
+      <svg viewBox="0 0 24 24" className="w-9 h-9 drop-shadow-[0_0_15px_#A855F7]" fill="none">
         <rect width="24" height="24" rx="4" fill="#0F172A" stroke="#A855F7" strokeWidth="1.5"/>
         <path d="M12 6v12M6 12h12M9 9l6 6M15 9l-6 6" stroke="#00F5FF" strokeWidth="1.5" strokeLinecap="round"/>
         <circle cx="12" cy="12" r="3" fill="#A855F7"/>
@@ -76,7 +71,7 @@ const techLogos = [
     ),
     delay: 12,
     radiusX: 0,
-    radiusY: 130,
+    radiusY: 140,
     duration: 14
   }
 ];
@@ -85,7 +80,7 @@ export default function Hero() {
   return (
     <section className="relative w-full bg-[#0B0B0F] text-left overflow-hidden border-b border-white/5 py-16 lg:py-24 px-6">
       
-      {/* 🔮 ব্যাকগ্রাউন্ডে ক্রিয়েティブ অ্যানিমেটেড মোশন গ্রাফিক্স */}
+      {/* 🔮 ব্যাকগ্রাউন্ডে মোশন গ্রাফিক্স */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-brand-neon/5 rounded-full blur-[100px]" />
@@ -109,22 +104,22 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
-        {/* 📸 বাম পাশ: ইমেজ এবং ৩ডি অরবিটিং লোগো কন্টেইনার */}
+        {/* 📸 বাম পাশ: ইমেজ এবং ৩ডি অরবিটিং লোগো */}
         <div className="lg:col-span-5 w-full max-w-[360px] lg:max-w-none mx-auto relative flex items-center justify-center min-h-[400px]">
           
-          {/* ইমেজের ব্যাকগ্রাউন্ড গ্লো ইফেক্ট */}
+          {/* ইমেজ ব্যাকগ্রাউন্ড গ্লো */}
           <div className="absolute w-[280px] h-[280px] bg-gradient-to-r from-brand-purple/20 to-brand-neon/20 rounded-full blur-3xl animate-pulse" />
 
-          {/* মেইন ইমেজ কন্টেইনার ফ্রেম */}
+          {/* মেইন ইমেজ কন্টেইনার */}
           <div className="relative w-[280px] h-[280px] lg:w-[320px] lg:h-[320px] rounded-full border border-white/10 overflow-hidden shadow-2xl bg-[#12121A] z-10 group">
             <img 
-              src="/ankur-profile.png" // 👈 আপনার নতুন ইমেজ ফাইলটির নাম public ফোল্ডারে 'ankur-profile.png' দিয়ে রাখুন
+              src="/ankur-profile.png" 
               alt="Ankur Biswas"
               className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
             />
           </div>
 
-          {/* 🌟 ৩ডি ৩ডি ফ্লোটিং এবং অরবিটিং লোগো মেকার */}
+          {/* 🌟 লোগো অরবিট মেকার */}
           {techLogos.map((logo, index) => (
             <motion.div
               key={index}
@@ -132,7 +127,6 @@ export default function Hero() {
               animate={{
                 x: [0, logo.radiusX, 0, -logo.radiusX, 0],
                 y: [logo.radiusY, 0, -logo.radiusY, 0, logo.radiusY],
-                z: [0, 10, 0, -10, 0],
                 scale: [1, 1.15, 0.9, 1.15, 1],
               }}
               transition={{
@@ -142,7 +136,6 @@ export default function Hero() {
                 delay: logo.delay,
               }}
             >
-              {/* ফ্লোটিং ফ্লেক্সিবল অ্যানিমেশন (লোগোটা যেন একটু ভাসে) */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{
