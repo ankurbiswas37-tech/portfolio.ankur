@@ -72,19 +72,18 @@ export default function Hero() {
   return (
     <section className="relative w-full bg-[#0B0B0F] text-left overflow-hidden border-b border-white/5 py-16 lg:py-24 px-6">
       
-      {/* 🖼️ ব্যাকগ্রাউন্ডে ফেস ব্লেন্ডিং এবং মোশন ইফেক্ট */}
+      {/* 🔮 ব্যাকগ্রাউন্ডে ফেস ব্লেন্ডিং এবং মোশন ইফেক্ট */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         
-        {/* 👉 রাইট সাইডে ফেস ব্লেন্ডিং এরিয়া (মোবাইলে হেডলাইনের পেছনে থাকবে, প্যারাগ্রাফে যাবে না) */}
+        {/* 👉 কাস্টম ব্যাকগ্রাউন্ড ফেস ইমেজ (profile 2.jpg) - Opacity 30% */}
         <div 
-          className="absolute right-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[320px] h-[320px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] opacity-60 z-0 select-none"
+          className="absolute right-0 top-0 lg:top-1/2 lg:-translate-y-1/2 w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[480px] lg:h-[480px] opacity-30 z-0 select-none bg-no-repeat"
           style={{
-            backgroundImage: "url('/ankur-profile.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'top center',
-            // ৪ দিক থেকে স্মুথ ব্লেন্ড করার জন্য রেডিয়াল মাস্ক
-            WebkitMaskImage: 'radial-gradient(circle at center, black 30%, transparent 75%)',
-            maskImage: 'radial-gradient(circle at center, black 30%, transparent 75%)',
+            backgroundImage: "url('/profile 2.jpg')",
+            backgroundSize: 'contain',
+            backgroundPosition: 'right top',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)',
+            maskImage: 'radial-gradient(circle at center, black 40%, transparent 80%)',
           }}
         />
 
@@ -122,17 +121,17 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
-        {/* 📸 বাম পাশ: ইমেজ অরবিট (ডেস্কটপে বামে থাকবে, মোবাইলে নিচে নামবে) */}
+        {/* 📸 বাম পাশ: লোগো অরবিট ফ্রেম */}
         <div className="lg:col-span-5 w-full max-w-[360px] lg:max-w-none mx-auto relative flex items-center justify-center min-h-[380px] order-last lg:order-first">
           <div className="absolute w-[280px] h-[280px] bg-gradient-to-r from-[#A855F7]/10 to-[#00F5FF]/10 rounded-full blur-3xl" />
           <div className="absolute w-[310px] h-[310px] rounded-full border border-white/5 border-dashed pointer-events-none" />
 
-          {/* মেইন প্রোফাইল সার্কেল ছবি */}
+          {/* মেইন প্রোফাইল সার্কেল ছবি (এখানেও আমরা profile 2.jpg ব্যবহার করছি) */}
           <div className="relative w-[240px] h-[240px] lg:w-[280px] lg:h-[280px] rounded-full border border-white/10 overflow-hidden shadow-2xl bg-[#12121A] z-10 group">
             <img 
-              src="/ankur-profile.png" 
+              src="/profile 2.jpg" 
               alt="Ankur Biswas"
-              className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
             />
           </div>
 
@@ -169,8 +168,8 @@ export default function Hero() {
         {/* ✍️ ডান পাশ: টেক্সট কন্টেন্ট */}
         <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left relative z-10">
           
-          {/* হেডলাইন সেকশন: মোবাইলে এর ঠিক পেছনেই ফেস ব্যাকগ্রাউন্ড মাস্ক ম্যাচ করবে */}
-          <div className="relative inline-block">
+          {/* হেডলাইন সেকশন (মোবাইলে এর ঠিক পেছনেই ৩০% অপাসিটিতে ফেস ব্যাকগ্রাউন্ড থাকবে) */}
+          <div className="relative inline-block h-auto">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight uppercase relative z-10">
               Bold Brands.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A855F7] to-[#00F5FF]">
@@ -179,7 +178,7 @@ export default function Hero() {
             </h1>
           </div>
 
-          {/* প্যারাগ্রাফ সেকশন: এখানে কোনো ইমেজ ব্লেন্ডিং ওভারল্যাপ করবে না */}
+          {/* প্যারাগ্রাফ সেকশন (এখানে ইমেজ ওভারল্যাপ করবে না) */}
           <p className="mt-6 text-gray-400 text-base md:text-lg max-w-xl lg:max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed relative z-10">
             Elevating visionary companies with impactful design solutions that capture attention and drive automated growth results.
           </p>
