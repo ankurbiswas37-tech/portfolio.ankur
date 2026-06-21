@@ -2,17 +2,94 @@
 
 import { motion } from 'framer-motion';
 
+// ৫টি সফটওয়্যার ও স্কিলের হাই-কোয়ালিটি SVG লোগো ডাটা
+const techLogos = [
+  {
+    name: "Photoshop",
+    // Ps Blue Icon
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#00C8FF]" fill="#001E36">
+        <rect width="24" height="24" rx="4" fill="#001E36" stroke="#00C8FF" strokeWidth="1.5"/>
+        <text x="5" y="16.5" fill="#00C8FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Ps</text>
+      </svg>
+    ),
+    delay: 0,
+    radiusX: 130, // ডানে-বামে ঘোরার ব্যাসার্ধ
+    radiusY: 50,  // ওপর-নিচে থ্রিডি বাঁকানোর ব্যাসার্ধ
+    duration: 15
+  },
+  {
+    name: "Premiere Pro",
+    // Pr Purple Icon
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#EA77FF]" fill="#2D003E">
+        <rect width="24" height="24" rx="4" fill="#2D003E" stroke="#EA77FF" strokeWidth="1.5"/>
+        <text x="5" y="16.5" fill="#EA77FF" fontSize="11" fontWeight="bold" fontFamily="Arial">Pr</text>
+      </svg>
+    ),
+    delay: 3,
+    radiusX: 140,
+    radiusY: -40,
+    duration: 18
+  },
+  {
+    name: "CapCut",
+    // Capcut Stylized Vector
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#FFFFFF]">
+        <rect width="24" height="24" rx="4" fill="#000000" stroke="#FFFFFF" strokeWidth="1"/>
+        <path d="M6 6h4v4H6z" fill="#00F5FF"/>
+        <path d="M14 14h4v4h-4z" fill="#FFFFFF"/>
+        <path d="M6 14h4v4H6z" fill="#FFFFFF"/>
+        <path d="M14 6h4v4h-4z" fill="#00F5FF"/>
+      </svg>
+    ),
+    delay: 6,
+    radiusX: -135,
+    radiusY: 45,
+    duration: 16
+  },
+  {
+    name: "GoHighLevel",
+    // GHL Custom Funnel/Automation Icon
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_10px_#2A85FF]" fill="none">
+        <rect width="24" height="24" rx="4" fill="#1E293B" stroke="#2A85FF" strokeWidth="1.5"/>
+        <path d="M7 7h10v2L13 14v4l-2 2v-6L7 9V7z" fill="#2A85FF"/>
+        <circle cx="12" cy="11" r="1.5" fill="#FFFFFF" />
+      </svg>
+    ),
+    delay: 9,
+    radiusX: -145,
+    radiusY: -55,
+    duration: 20
+  },
+  {
+    name: "AI",
+    // AI Cyber Glow Tech Icon
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-8 h-8 drop-shadow-[0_0_12px_#A855F7]" fill="none">
+        <rect width="24" height="24" rx="4" fill="#0F172A" stroke="#A855F7" strokeWidth="1.5"/>
+        <path d="M12 6v12M6 12h12M9 9l6 6M15 9l-6 6" stroke="#00F5FF" strokeWidth="1.5" strokeLinecap="round"/>
+        <circle cx="12" cy="12" r="3" fill="#A855F7"/>
+      </svg>
+    ),
+    delay: 12,
+    radiusX: 0,
+    radiusY: 130,
+    duration: 14
+  }
+];
+
 export default function Hero() {
   return (
     <section className="relative w-full bg-[#0B0B0F] text-left overflow-hidden border-b border-white/5 py-16 lg:py-24 px-6">
       
-      {/* 🔮 ব্যাকগ্রাউন্ডে ক্রিয়েটিভ অ্যানিমেটেড মোশন গ্রাফিক্স */}
+      {/* 🔮 ব্যাকগ্রাউন্ডে ক্রিয়েティブ অ্যানিমেটেড মোশন গ্রাফিক্স */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* গ্লোইং লাইট ফোকাস */}
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-brand-purple/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-brand-neon/5 rounded-full blur-[100px]" />
 
-        {/* ডাইনামিক ইন্টারঅ্যাক্টিভ ভেক্টর লাইনস ও অরবিট */}
         <svg className="absolute inset-0 w-full h-full opacity-100" xmlns="http://www.w3.org/2000/svg">
           <motion.circle 
             cx="20%" cy="30%" r="150" 
@@ -21,88 +98,66 @@ export default function Hero() {
             transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
             style={{ transformOrigin: "20% 30%" }}
           />
-          <motion.circle 
-            cx="80%" cy="60%" r="220" 
-            stroke="url(#heroNeonGradient)" strokeWidth="0.5" strokeDasharray="4 8" fill="none"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-            style={{ transformOrigin: "80%" }}
-          />
           <defs>
             <linearGradient id="heroPurpleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#A855F7" stopOpacity="0.8" />
               <stop offset="100%" stopColor="#6366F1" stopOpacity="0" />
             </linearGradient>
-            <linearGradient id="heroNeonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#00F5FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#D946EF" stopOpacity="0" />
-            </linearGradient>
           </defs>
         </svg>
-
-        {/* ফ্লোটিং নিয়ন পার্টিকলস (Floating Digital Nodes) */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute rounded-full ${i % 2 === 0 ? 'bg-brand-purple/40 shadow-[0_0_10px_#A855F7]' : 'bg-brand-neon/40 shadow-[0_0_10px_#00F5FF]'}`}
-            style={{
-              width: Math.random() * 4 + 3 + 'px',
-              height: Math.random() * 4 + 3 + 'px',
-              left: Math.random() * 90 + 5 + '%',
-              top: Math.random() * 80 + 10 + '%',
-            }}
-            animate={{
-              y: [0, Math.random() * -40 - 20, 0],
-              opacity: [0.8, 0.8, 0.8]
-            }}
-            transition={{
-              duration: Math.random() * 5 + 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.7
-            }}
-          />
-        ))}
       </div>
 
-      {/* ২ কলামের রেস্পেনসিভ গ্রিড: বামে ছোট ইমেজ এবং ডানে টেক্সট */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
         
-        {/* 📸 বাম পাশ: ইমেজ কন্টেইনার (১২ ভাগের মধ্যে ৪ ভাগ জায়গা নিয়ে সাইজ কমানো হয়েছে) */}
-        <div className="lg:col-span-5 w-full max-w-[340px] lg:max-w-none mx-auto relative group">
+        {/* 📸 বাম পাশ: ইমেজ এবং ৩ডি অরবিটিং লোগো কন্টেইনার */}
+        <div className="lg:col-span-5 w-full max-w-[360px] lg:max-w-none mx-auto relative flex items-center justify-center min-h-[400px]">
           
-          {/* ইমেজের পেছনে স্মুথ নিয়ন গ্লো */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-brand-purple to-brand-neon rounded-2xl blur-md opacity-75 group-hover:opacity-75 transition duration-500"></div>
-          
-          {/* মেইন ইমেজ ফ্রেম */}
-          <div className="relative w-full aspect-[5/5] bg-[#12121A] rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-            <img 
-              src="/linkedin Ankur.png"
-              alt="Ankur Biswas"
-              className="w-full h-full object-cover object-center transition duration-500 group-hover:scale-105"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                const parent = e.currentTarget.parentElement;
-                if (parent) {
-                  const placeholder = parent.querySelector('.img-placeholder');
-                  if (placeholder) placeholder.classList.remove('hidden');
-                }
-              }}
-            />
+          {/* ইমেজের ব্যাকগ্রাউন্ড গ্লো ইফেক্ট */}
+          <div className="absolute w-[280px] h-[280px] bg-gradient-to-r from-brand-purple/20 to-brand-neon/20 rounded-full blur-3xl animate-pulse" />
 
-            {/* ফলব্যাক প্লেসহোল্ডার */}
-            <div className="img-placeholder hidden absolute inset-0 w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-[#12121A] to-black">
-              <div className="w-12 h-12 rounded-full bg-brand-purple/10 flex items-center justify-center text-brand-neon mb-4">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
-              </div>
-              <p className="text-xs font-semibold text-white tracking-wide">Image Ready</p>
-            </div>
+          {/* মেইন ইমেজ কন্টেইনার ফ্রেম */}
+          <div className="relative w-[280px] h-[280px] lg:w-[320px] lg:h-[320px] rounded-full border border-white/10 overflow-hidden shadow-2xl bg-[#12121A] z-10 group">
+            <img 
+              src="/ankur-profile.png" // 👈 আপনার নতুন ইমেজ ফাইলটির নাম public ফোল্ডারে 'ankur-profile.png' দিয়ে রাখুন
+              alt="Ankur Biswas"
+              className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
+            />
           </div>
+
+          {/* 🌟 ৩ডি ৩ডি ফ্লোটিং এবং অরবিটিং লোগো মেকার */}
+          {techLogos.map((logo, index) => (
+            <motion.div
+              key={index}
+              className="absolute z-20 pointer-events-auto cursor-pointer"
+              animate={{
+                x: [0, logo.radiusX, 0, -logo.radiusX, 0],
+                y: [logo.radiusY, 0, -logo.radiusY, 0, logo.radiusY],
+                z: [0, 10, 0, -10, 0],
+                scale: [1, 1.15, 0.9, 1.15, 1],
+              }}
+              transition={{
+                duration: logo.duration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: logo.delay,
+              }}
+            >
+              {/* ফ্লোটিং ফ্লেক্সিবল অ্যানিমেশন (লোগোটা যেন একটু ভাসে) */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{
+                  duration: 3 + (index % 2),
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                {logo.svg}
+              </motion.div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* ✍️ ডান পাশ: টেক্সট কন্টেন্ট (১২ ভাগের মধ্যে ৮ ভাগ জায়গা পাবে) */}
+        {/* ✍️ ডান পাশ: টেক্সট কন্টেন্ট */}
         <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight uppercase">
             Bold Brands.<br />
