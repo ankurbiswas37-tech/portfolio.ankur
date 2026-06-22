@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// ডাইনামিক ক্যাটাগরি এবং সাব-অ্যাসেট গ্যালারি ডাটা স্ট্রাকচার
+// 📂 প্রতিটা ক্যাটাগরির জন্য ৬টি করে সম্পূর্ণ আলাদা ইমেজের ডাটা স্ট্রাকচার
 const targetProjects = [
   { 
     slug: "brand-identity", 
@@ -13,12 +13,12 @@ const targetProjects = [
     image: "/brand identity.png", 
     subDesc: "Premium logos, corporate guidelines, and cohesive design assets built for Neon Hippo.",
     subAssets: [
-      { id: 1, name: "MAIN CONCEPT ASSET", label: "Asset #1", src: "/brand identity.png" },
-      { id: 2, name: "ALTERNATIVE LAYOUT DESIGN", label: "Asset #2", src: "/brand identity.png" },
-      { id: 3, name: "MOBILE RESPONSIVE BLUEPRINT", label: "Asset #3", src: "/brand identity.png" },
-      { id: 4, name: "TYPOGRAPHY & COLOR SYSTEM", label: "Asset #4", src: "/brand identity.png" },
-      { id: 5, name: "HIGH-FIDELITY WIREFRAME", label: "Asset #5", src: "/brand identity.png" },
-      { id: 6, name: "FINAL PRODUCTION DELIVERABLE", label: "Asset #6", src: "/brand identity.png" }
+      { id: 1, name: "MAIN CONCEPT ASSET", label: "Asset #1", src: "/brand_identity_1.png" },
+      { id: 2, name: "ALTERNATIVE LAYOUT DESIGN", label: "Asset #2", src: "/brand_identity_2.png" },
+      { id: 3, name: "MOBILE RESPONSIVE BLUEPRINT", label: "Asset #3", src: "/brand_identity_3.png" },
+      { id: 4, name: "TYPOGRAPHY & COLOR SYSTEM", label: "Asset #4", src: "/brand_identity_4.png" },
+      { id: 5, name: "HIGH-FIDELITY WIREFRAME", label: "Asset #5", src: "/brand_identity_5.png" },
+      { id: 6, name: "FINAL PRODUCTION DELIVERABLE", label: "Asset #6", src: "/brand_identity_6.png" }
     ]
   },
   { 
@@ -29,12 +29,12 @@ const targetProjects = [
     image: "/video editing.png", 
     subDesc: "Engaging commercial ads, podcasts, and viral short-form contents built with precision.",
     subAssets: [
-      { id: 1, name: "COLOR GRADING SUITE", label: "Asset #1", src: "/video editing.png" },
-      { id: 2, name: "TIMELINE BREAKDOWN", label: "Asset #2", src: "/video editing.png" },
-      { id: 3, name: "MOTION GRAPHICS PREVIEW", label: "Asset #3", src: "/video editing.png" },
-      { id: 4, name: "TRANSITIONS VAULT", label: "Asset #4", src: "/video editing.png" },
-      { id: 5, name: "AUDIO WAVEFORM EDIT", label: "Asset #5", src: "/video editing.png" },
-      { id: 6, name: "EXPORT FORMATS GRID", label: "Asset #6", src: "/video editing.png" }
+      { id: 1, name: "COLOR GRADING SUITE", label: "Asset #1", src: "/video_editing_1.png" },
+      { id: 2, name: "TIMELINE BREAKDOWN", label: "Asset #2", src: "/video_editing_2.png" },
+      { id: 3, name: "MOTION GRAPHICS PREVIEW", label: "Asset #3", src: "/video_editing_3.png" },
+      { id: 4, name: "TRANSITIONS VAULT", label: "Asset #4", src: "/video_editing_4.png" },
+      { id: 5, name: "AUDIO WAVEFORM EDIT", label: "Asset #5", src: "/video_editing_5.png" },
+      { id: 6, name: "EXPORT FORMATS GRID", label: "Asset #6", src: "/video_editing_6.png" }
     ]
   },
   { 
@@ -45,12 +45,12 @@ const targetProjects = [
     image: "/digital design.png", 
     subDesc: "High-end social media assets, marketing web pages, and custom digital assets.",
     subAssets: [
-      { id: 1, name: "SOCIAL MEDIA DESIGN BLOCK", label: "Asset #1", src: "/digital design.png" },
-      { id: 2, name: "WEB BANNER VARIANT", label: "Asset #2", src: "/digital design.png" },
-      { id: 3, name: "EMAIL TEMPLATE SYSTEM", label: "Asset #3", src: "/digital design.png" },
-      { id: 4, name: "UI DESIGN COMPONENT", label: "Asset #4", src: "/digital design.png" },
-      { id: 5, name: "DIGITAL AD TARGET", label: "Asset #5", src: "/digital design.png" },
-      { id: 6, name: "ICON SET SCHEMATIC", label: "Asset #6", src: "/digital design.png" }
+      { id: 1, name: "SOCIAL MEDIA DESIGN BLOCK", label: "Asset #1", src: "/digital_design_1.png" },
+      { id: 2, name: "WEB BANNER VARIANT", label: "Asset #2", src: "/digital_design_2.png" },
+      { id: 3, name: "EMAIL TEMPLATE SYSTEM", label: "Asset #3", src: "/digital_design_3.png" },
+      { id: 4, name: "UI DESIGN COMPONENT", label: "Asset #4", src: "/digital_design_4.png" },
+      { id: 5, name: "DIGITAL AD TARGET", label: "Asset #5", src: "/digital_design_5.png" },
+      { id: 6, name: "ICON SET SCHEMATIC", label: "Asset #6", src: "/digital_design_6.png" }
     ]
   },
   { 
@@ -61,12 +61,12 @@ const targetProjects = [
     image: "/GHL funnel Build.png", 
     subDesc: "High-converting GoHighLevel landing pages, SaaS sub-account setup, and triggers.",
     subAssets: [
-      { id: 1, name: "HIGH-CONVERTING LANDING PAGE", label: "Asset #1", src: "/GHL funnel Build.png" },
-      { id: 2, name: "OPT-IN FORM SCHEMA", label: "Asset #2", src: "/GHL funnel Build.png" },
-      { id: 3, name: "SALES PAGE AUTOMATION", label: "Asset #3", src: "/GHL funnel Build.png" },
-      { id: 4, name: "EMAIL AUTOMATION TRIGGERS", label: "Asset #4", src: "/GHL funnel Build.png" },
-      { id: 5, name: "CHECKOUT PAGE CONVERSION", label: "Asset #5", src: "/GHL funnel Build.png" },
-      { id: 6, name: "THANK YOU PAGE SPEC", label: "Asset #6", src: "/GHL funnel Build.png" }
+      { id: 1, name: "HIGH-CONVERTING LANDING PAGE", label: "Asset #1", src: "/ghl_funnel_1.png" },
+      { id: 2, name: "OPT-IN FORM SCHEMA", label: "Asset #2", src: "/ghl_funnel_2.png" },
+      { id: 3, name: "SALES PAGE AUTOMATION", label: "Asset #3", src: "/ghl_funnel_3.png" },
+      { id: 4, name: "EMAIL AUTOMATION TRIGGERS", label: "Asset #4", src: "/ghl_funnel_4.png" },
+      { id: 5, name: "CHECKOUT PAGE CONVERSION", label: "Asset #5", src: "/ghl_funnel_5.png" },
+      { id: 6, name: "THANK YOU PAGE SPEC", label: "Asset #6", src: "/ghl_funnel_6.png" }
     ]
   },
 ];
@@ -77,13 +77,11 @@ export default function PortfolioGrid() {
 
   const currentProject = targetProjects.find(p => p.slug === activeSlug);
 
-  // কার্ডে ক্লিক করার পর স্ক্রোল ট্রিগার করার হ্যান্ডলার
   const handleCardClick = (slug: string) => {
     if (activeSlug === slug) {
       setActiveSlug(null);
     } else {
       setActiveSlug(slug);
-      // ছোট টাইমিং ডিলে দিয়ে নিচে স্মুথলি স্ক্রোল করানো
       setTimeout(() => {
         const element = document.getElementById("dynamic-vault-section");
         if (element) {
@@ -123,7 +121,7 @@ export default function PortfolioGrid() {
         </p>
       </div>
 
-      {/* 🎴 মেইন ৪টি ইন্টারেক্টিভ ক্লিকেবল কার্ড */}
+      {/* 🎴 মেইন ৪টি কার্ড */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
         {targetProjects.map((project, index) => {
           const isSelected = activeSlug === project.slug;
@@ -143,7 +141,7 @@ export default function PortfolioGrid() {
                 <img 
                   src={project.image} 
                   alt={project.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-all duration-500"
+                  className="absolute inset-0 w-full h-full object-cover opacity-70"
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0B0B0F]/90 z-10 flex items-end p-3">
                   <span className="text-[10px] bg-brand-neon/20 border border-brand-neon/30 text-brand-neon px-2 py-0.5 rounded font-bold uppercase tracking-widest">
@@ -159,7 +157,7 @@ export default function PortfolioGrid() {
         })}
       </div>
 
-      {/* 🔓 ডাইনামিক ৬টি সাব-অ্যাসেট গ্যালারি গ্রিড (আইডি দিয়ে অটো স্ক্রোল টার্গেট করা হয়েছে) */}
+      {/* 🔓 ৬টি আলাদা সাব-অ্যাসেট গ্যালারি গ্রিড */}
       <div id="dynamic-vault-section" className="scroll-mt-24">
         <AnimatePresence mode="wait">
           {activeSlug && currentProject && (
@@ -182,6 +180,7 @@ export default function PortfolioGrid() {
                 </span>
               </div>
 
+              {/* 🖼️ এখানে এখন প্রতিটি অ্যাসেটের নিজস্ব ইউনিক ছবি (asset.src) লোড হবে */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentProject.subAssets.map((asset, index) => (
                   <div 
@@ -192,16 +191,12 @@ export default function PortfolioGrid() {
                     <img 
                       src={asset.src} 
                       alt={asset.name} 
-                      className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition duration-500"
+                      className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-80 transition duration-500"
                     />
-                    <svg className="w-8 h-8 text-brand-purple/60 group-hover:text-brand-neon transition mb-4 relative z-10" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 00.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                    </svg>
-                    <h4 className="text-white text-sm font-black tracking-wide uppercase relative z-10 group-hover:text-brand-neon transition">{asset.name}</h4>
-                    <span className="text-[10px] text-gray-500 font-medium uppercase mt-1 relative z-10">{asset.label}</span>
                     
-                    <div className="absolute top-4 right-4 w-5 h-5 rounded-full border border-brand-neon/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                      <div className="w-1.5 h-1.5 bg-brand-neon rounded-full" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F]/20 to-[#0B0B0F]/90 z-10 flex flex-col items-center justify-end pb-4 w-full h-full">
+                      <h4 className="text-white text-sm font-black tracking-wide uppercase px-2 text-center drop-shadow-md">{asset.name}</h4>
+                      <span className="text-[10px] text-brand-neon font-semibold uppercase mt-0.5 tracking-wider">{asset.label}</span>
                     </div>
                   </div>
                 ))}
@@ -216,7 +211,7 @@ export default function PortfolioGrid() {
         </AnimatePresence>
       </div>
 
-      {/* 🖼️ ফুলস্ক্রিন লাইটবক্স মডেল স্লাইডার */}
+      {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স স্লাইডার (নেক্সট/প্রিভিয়াস ওয়ার্কিং) */}
       <AnimatePresence>
         {lightboxIndex !== null && currentProject && (
           <motion.div 
@@ -224,21 +219,23 @@ export default function PortfolioGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setLightboxIndex(null)}
-            className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4 md:p-10"
+            className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4 md:p-10 animate-fade"
           >
-            <button className="absolute top-6 right-6 text-white/70 hover:text-white text-sm font-bold tracking-widest uppercase bg-white/5 px-4 py-2 rounded border border-white/10">
+            <button className="absolute top-6 right-6 text-white/70 hover:text-white text-sm font-bold tracking-widest uppercase bg-white/5 px-4 py-2 rounded border border-white/10 z-30">
               CLOSE ×
             </button>
 
+            {/* বামে যাওয়ার অ্যারো */}
             <button 
               onClick={prevImage}
-              className="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-20"
+              className="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-30"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
               </svg>
             </button>
 
+            {/* মেইন ইমেজ কন্টেইনার */}
             <motion.div 
               key={lightboxIndex}
               initial={{ scale: 0.95, opacity: 0 }}
@@ -246,7 +243,7 @@ export default function PortfolioGrid() {
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-5xl max-h-[75vh] md:max-h-[80vh] flex flex-col items-center"
+              className="relative max-w-5xl max-h-[75vh] md:max-h-[80vh] flex flex-col items-center z-20"
             >
               <img 
                 src={currentProject.subAssets[lightboxIndex].src} 
@@ -264,9 +261,10 @@ export default function PortfolioGrid() {
               </div>
             </motion.div>
 
+            {/* ডানে যাওয়ার অ্যারো */}
             <button 
               onClick={nextImage}
-              className="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-20"
+              className="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-30"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
