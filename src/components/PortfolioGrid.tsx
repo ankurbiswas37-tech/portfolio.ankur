@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// 📂 প্রতিটা ক্যাটাগরির জন্য ৬টি করে সম্পূর্ণ আলাদা ইমেজের ডাটা স্ট্রাকচার
+// ডাইনামিক ক্যাটাগরি এবং সাব-অ্যাসেট গ্যালারি ডাটা স্ট্রাকচার
 const targetProjects = [
   { 
     slug: "brand-identity", 
@@ -11,14 +11,15 @@ const targetProjects = [
     category: "Visual Systems & Strategy", 
     tag: "BRANDING",
     image: "/brand identity.png", 
-    subDesc: "Premium logos, corporate guidelines, and cohesive design assets built for Neon Hippo.",
+    // F&G Real Estate Business আপডেট
+    subDesc: "Premium branding system tailored for Farwell + Gervase Premium Accommodation & Real Estate Business. Delivering architectural typography, warm corporate color palettes, and elevated marketing stationery.",
     subAssets: [
-      { id: 1, name: "MAIN CONCEPT ASSET", label: "Asset #1", src: "/brand_identity_1.png" },
-      { id: 2, name: "ALTERNATIVE LAYOUT DESIGN", label: "Asset #2", src: "/brand_identity_2.png" },
-      { id: 3, name: "MOBILE RESPONSIVE BLUEPRINT", label: "Asset #3", src: "/brand_identity_3.png" },
-      { id: 4, name: "TYPOGRAPHY & COLOR SYSTEM", label: "Asset #4", src: "/brand_identity_4.png" },
-      { id: 5, name: "HIGH-FIDELITY WIREFRAME", label: "Asset #5", src: "/brand_identity_5.png" },
-      { id: 6, name: "FINAL PRODUCTION DELIVERABLE", label: "Asset #6", src: "/brand_identity_6.png" }
+      { id: 1, name: "LOGO", label: "Asset #1", src: "/brand_identity_1.png" },
+      { id: 2, name: "COLOR PALETTE", label: "Asset #2", src: "/brand_identity_2.png" },
+      { id: 3, name: "GUIDELINE", label: "Asset #3", src: "/brand_identity_3.png" },
+      { id: 4, name: "TYPOGRAPHY", label: "Asset #4", src: "/brand_identity_4.png" },
+      { id: 5, name: "BUSINESS CARD", label: "Asset #5", src: "/brand_identity_5.png" },
+      { id: 6, name: "BRAND PATTERN", label: "Asset #6", src: "/brand_identity_6.png" }
     ]
   },
   { 
@@ -27,14 +28,14 @@ const targetProjects = [
     category: "Ads & High-Retention Cuts", 
     tag: "VIDEO EDITING",
     image: "/video editing.png", 
-    subDesc: "Engaging commercial ads, podcasts, and viral short-form contents built with precision.",
+    subDesc: "Engaging commercial ads, real estate walkthrough videos, and high-retention social content built with precision.",
     subAssets: [
-      { id: 1, name: "COLOR GRADING SUITE", label: "Asset #1", src: "/video_editing_1.png" },
-      { id: 2, name: "TIMELINE BREAKDOWN", label: "Asset #2", src: "/video_editing_2.png" },
-      { id: 3, name: "MOTION GRAPHICS PREVIEW", label: "Asset #3", src: "/video_editing_3.png" },
-      { id: 4, name: "TRANSITIONS VAULT", label: "Asset #4", src: "/video_editing_4.png" },
-      { id: 5, name: "AUDIO WAVEFORM EDIT", label: "Asset #5", src: "/video_editing_5.png" },
-      { id: 6, name: "EXPORT FORMATS GRID", label: "Asset #6", src: "/video_editing_6.png" }
+      { id: 1, name: "COLOR GRADING", label: "Asset #1", src: "/video_editing_1.png" },
+      { id: 2, name: "TIMELINE", label: "Asset #2", src: "/video_editing_2.png" },
+      { id: 3, name: "MOTION GRAPHICS", label: "Asset #3", src: "/video_editing_3.png" },
+      { id: 4, name: "TRANSITIONS", label: "Asset #4", src: "/video_editing_4.png" },
+      { id: 5, name: "AUDIO WAVEFORM", label: "Asset #5", src: "/video_editing_5.png" },
+      { id: 6, name: "EXPORT FORMATS", label: "Asset #6", src: "/video_editing_6.png" }
     ]
   },
   { 
@@ -43,14 +44,14 @@ const targetProjects = [
     category: "Social Assets & UI Artifacts", 
     tag: "DIGITAL DESIGN",
     image: "/digital design.png", 
-    subDesc: "High-end social media assets, marketing web pages, and custom digital assets.",
+    subDesc: "High-end social media assets, commercial real estate web banners, and marketing templates.",
     subAssets: [
-      { id: 1, name: "SOCIAL MEDIA DESIGN BLOCK", label: "Asset #1", src: "/digital_design_1.png" },
-      { id: 2, name: "WEB BANNER VARIANT", label: "Asset #2", src: "/digital_design_2.png" },
-      { id: 3, name: "EMAIL TEMPLATE SYSTEM", label: "Asset #3", src: "/digital_design_3.png" },
-      { id: 4, name: "UI DESIGN COMPONENT", label: "Asset #4", src: "/digital_design_4.png" },
-      { id: 5, name: "DIGITAL AD TARGET", label: "Asset #5", src: "/digital_design_5.png" },
-      { id: 6, name: "ICON SET SCHEMATIC", label: "Asset #6", src: "/digital_design_6.png" }
+      { id: 1, name: "SOCIAL MEDIA DESIGN", label: "Asset #1", src: "/digital_design_1.png" },
+      { id: 2, name: "WEB BANNER", label: "Asset #2", src: "/digital_design_2.png" },
+      { id: 3, name: "EMAIL TEMPLATE", label: "Asset #3", src: "/digital_design_3.png" },
+      { id: 4, name: "UI DESIGN", label: "Asset #4", src: "/digital_design_4.png" },
+      { id: 5, name: "DIGITAL AD", label: "Asset #5", src: "/digital_design_5.png" },
+      { id: 6, name: "ICON SET", label: "Asset #6", src: "/digital_design_6.png" }
     ]
   },
   { 
@@ -59,14 +60,14 @@ const targetProjects = [
     category: "Marketing Automation Systems", 
     tag: "FUNNEL & CRM",
     image: "/GHL funnel Build.png", 
-    subDesc: "High-converting GoHighLevel landing pages, SaaS sub-account setup, and triggers.",
+    subDesc: "High-converting real estate lead capture funnels, property booking workflows, and CRM automation triggers.",
     subAssets: [
-      { id: 1, name: "HIGH-CONVERTING LANDING PAGE", label: "Asset #1", src: "/ghl_funnel_1.png" },
-      { id: 2, name: "OPT-IN FORM SCHEMA", label: "Asset #2", src: "/ghl_funnel_2.png" },
-      { id: 3, name: "SALES PAGE AUTOMATION", label: "Asset #3", src: "/ghl_funnel_3.png" },
-      { id: 4, name: "EMAIL AUTOMATION TRIGGERS", label: "Asset #4", src: "/ghl_funnel_4.png" },
-      { id: 5, name: "CHECKOUT PAGE CONVERSION", label: "Asset #5", src: "/ghl_funnel_5.png" },
-      { id: 6, name: "THANK YOU PAGE SPEC", label: "Asset #6", src: "/ghl_funnel_6.png" }
+      { id: 1, name: "LANDING PAGE", label: "Asset #1", src: "/ghl_funnel_1.png" },
+      { id: 2, name: "OPT-IN FORM", label: "Asset #2", src: "/ghl_funnel_2.png" },
+      { id: 3, name: "SALES PAGE", label: "Asset #3", src: "/ghl_funnel_3.png" },
+      { id: 4, name: "EMAIL AUTOMATION", label: "Asset #4", src: "/ghl_funnel_4.png" },
+      { id: 5, name: "CHECKOUT PAGE", label: "Asset #5", src: "/ghl_funnel_5.png" },
+      { id: 6, name: "THANK YOU PAGE", label: "Asset #6", src: "/ghl_funnel_6.png" }
     ]
   },
 ];
@@ -180,28 +181,36 @@ export default function PortfolioGrid() {
                 </span>
               </div>
 
-              {/* 🖼️ এখানে এখন প্রতিটি অ্যাসেটের নিজস্ব ইউনিক ছবি (asset.src) লোড হবে */}
+              {/* 🖼️ ইমেজ সাইজ অনুযায়ী রেসপনসিভ কন্টেইনার গ্রিড */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentProject.subAssets.map((asset, index) => (
                   <div 
                     key={asset.id}
                     onClick={() => setLightboxIndex(index)}
-                    className="group bg-[#12121A] border border-white/5 hover:border-brand-purple/40 rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center min-h-[240px] relative overflow-hidden"
+                    className="group bg-[#12121A] border border-white/5 hover:border-brand-purple/40 rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center relative overflow-hidden w-full aspect-[3/2]"
                   >
+                    {/* ইমেজ তার নিজস্ব সাইজ ও অ্যাসপেক্ট রেশিও বজায় রাখবে */}
                     <img 
                       src={asset.src} 
                       alt={asset.name} 
                       className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-80 transition duration-500"
                     />
                     
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F]/20 to-[#0B0B0F]/90 z-10 flex flex-col items-center justify-end pb-4 w-full h-full">
-                      <h4 className="text-white text-sm font-black tracking-wide uppercase px-2 text-center drop-shadow-md">{asset.name}</h4>
-                      <span className="text-[10px] text-brand-neon font-semibold uppercase mt-0.5 tracking-wider">{asset.label}</span>
+                    {/* কালো ফেড লেয়ার ওভারলে এবং কাস্টম মিনিমাল টেক্সট */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F]/10 via-[#0B0B0F]/40 to-[#0B0B0F]/90 z-10 flex flex-col items-center justify-end pb-5 w-full h-full">
+                      <h4 className="text-white text-base font-black tracking-wider uppercase px-2 text-center drop-shadow-md transition duration-300 group-hover:text-brand-neon">{asset.name}</h4>
+                      <span className="text-[10px] text-brand-purple font-bold uppercase mt-0.5 tracking-widest opacity-80">{asset.label}</span>
+                    </div>
+
+                    {/* হোভার ইন্ডিকেটর গ্লো ডট */}
+                    <div className="absolute top-4 right-4 w-5 h-5 rounded-full border border-brand-neon/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                      <div className="w-1.5 h-1.5 bg-brand-neon rounded-full shadow-[0_0_8px_#00F5FF]" />
                     </div>
                   </div>
                 ))}
               </div>
 
+              {/* প্রজেক্ট কোর ডিটেইলস প্যানেল */}
               <div className="mt-12 bg-[#12121A] border border-white/5 rounded-xl p-6 text-left">
                 <h4 className="text-white font-bold text-base uppercase tracking-wider">PROJECT CORE DETAILS</h4>
                 <p className="text-gray-400 text-sm mt-2 leading-relaxed font-light">{currentProject.subDesc}</p>
@@ -211,7 +220,7 @@ export default function PortfolioGrid() {
         </AnimatePresence>
       </div>
 
-      {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স স্লাইডার (নেক্সট/প্রিভিয়াস ওয়ার্কিং) */}
+      {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স স্লাইডার */}
       <AnimatePresence>
         {lightboxIndex !== null && currentProject && (
           <motion.div 
@@ -219,13 +228,12 @@ export default function PortfolioGrid() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setLightboxIndex(null)}
-            className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4 md:p-10 animate-fade"
+            className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4 md:p-10"
           >
             <button className="absolute top-6 right-6 text-white/70 hover:text-white text-sm font-bold tracking-widest uppercase bg-white/5 px-4 py-2 rounded border border-white/10 z-30">
               CLOSE ×
             </button>
 
-            {/* বামে যাওয়ার অ্যারো */}
             <button 
               onClick={prevImage}
               className="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-30"
@@ -235,7 +243,6 @@ export default function PortfolioGrid() {
               </svg>
             </button>
 
-            {/* মেইন ইমেজ কন্টেইনার */}
             <motion.div 
               key={lightboxIndex}
               initial={{ scale: 0.95, opacity: 0 }}
@@ -261,7 +268,6 @@ export default function PortfolioGrid() {
               </div>
             </motion.div>
 
-            {/* ডানে যাওয়ার অ্যারো */}
             <button 
               onClick={nextImage}
               className="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-30"
