@@ -12,7 +12,6 @@ const targetProjects = [
     tag: "BRANDING",
     image: "/brand identity.png", 
     subDesc: "Premium logos, corporate guidelines, and cohesive design assets built for Neon Hippo.",
-    // স্ক্রিনশট image_ac7efd.png অনুযায়ী নির্দিষ্ট ৬টি অ্যাসেট
     subAssets: [
       { id: 1, name: "MAIN CONCEPT ASSET", label: "Asset #1", src: "/brand identity.png" },
       { id: 2, name: "ALTERNATIVE LAYOUT DESIGN", label: "Asset #2", src: "/brand identity.png" },
@@ -78,7 +77,22 @@ export default function PortfolioGrid() {
 
   const currentProject = targetProjects.find(p => p.slug === activeSlug);
 
-  // লাইটবক্সে পরবর্তী ছবিতে যাওয়ার ফাংশন
+  // কার্ডে ক্লিক করার পর স্ক্রোল ট্রিগার করার হ্যান্ডলার
+  const handleCardClick = (slug: string) => {
+    if (activeSlug === slug) {
+      setActiveSlug(null);
+    } else {
+      setActiveSlug(slug);
+      // ছোট টাইমিং ডিলে দিয়ে নিচে স্মুথলি স্ক্রোল করানো
+      setTimeout(() => {
+        const element = document.getElementById("dynamic-vault-section");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 100);
+    }
+  };
+
   const nextImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (currentProject && lightboxIndex !== null) {
@@ -86,7 +100,6 @@ export default function PortfolioGrid() {
     }
   };
 
-  // লাইটবক্সে আগের ছবিতে যাওয়ার ফাংশন
   const prevImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (currentProject && lightboxIndex !== null) {
@@ -97,7 +110,7 @@ export default function PortfolioGrid() {
   return (
     <section className="w-full py-24 bg-[#0B0B0F] px-6 select-none" id="portfolio">
       
-      {/* 🧠 হেডলাইন এরিয়া (My Workspace থিমে) */}
+      {/* 🧠 হেডলাইন এরিয়া */}
       <div className="max-w-7xl mx-auto text-center mb-16">
         <span className="text-xs font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon uppercase">
           My Creative Workspace
@@ -116,7 +129,7 @@ export default function PortfolioGrid() {
           const isSelected = activeSlug === project.slug;
           return (
             <div 
-              onClick={() => setActiveSlug(isSelected ? null : project.slug)}
+              onClick={() => handleCardClick(project.slug)}
               key={index} 
               className={`cursor-pointer rounded-xl p-5 border transition-all duration-300 block text-left ${
                 isSelected 
@@ -146,65 +159,64 @@ export default function PortfolioGrid() {
         })}
       </div>
 
-      {/* 🔓 ডাইনামিক ৬টি সাব-অ্যাসেট গ্যালারি গ্রিড (স্ক্রিনশট image_ac7efd.png ডিজাইনে ম্যাচ করা) */}
-      <AnimatePresence mode="wait">
-        {activeSlug && currentProject && (
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="max-w-7xl mx-auto border-t border-white/10 pt-16"
-          >
-            <div className="text-left mb-10">
-              <h3 className="text-3xl font-black text-white tracking-tight uppercase">
-                {currentProject.title} VAULT
-              </h3>
-              <p className="text-gray-400 text-sm mt-2 font-light max-w-3xl">
-                Welcome to the official workspace vault for <span className="text-white font-bold">{currentProject.title}</span>. Below are the design outputs, assets, and project results delivered to my clients.
-              </p>
-              <span className="text-xs font-bold text-gray-500 tracking-widest block uppercase mt-8 border-b border-white/5 pb-2">
-                UPLOADED WORK SAMPLES & DELIVERABLES
-              </span>
-            </div>
+      {/* 🔓 ডাইনামিক ৬টি সাব-অ্যাসেট গ্যালারি গ্রিড (আইডি দিয়ে অটো স্ক্রোল টার্গেট করা হয়েছে) */}
+      <div id="dynamic-vault-section" className="scroll-mt-24">
+        <AnimatePresence mode="wait">
+          {activeSlug && currentProject && (
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="max-w-7xl mx-auto border-t border-white/10 pt-16"
+            >
+              <div className="text-left mb-10">
+                <h3 className="text-3xl font-black text-white tracking-tight uppercase">
+                  {currentProject.title} VAULT
+                </h3>
+                <p className="text-gray-400 text-sm mt-2 font-light max-w-3xl">
+                  Welcome to the official workspace vault for <span className="text-white font-bold">{currentProject.title}</span>. Below are the design outputs, assets, and project results delivered to my clients.
+                </p>
+                <span className="text-xs font-bold text-gray-500 tracking-widest block uppercase mt-8 border-b border-white/5 pb-2">
+                  UPLOADED WORK SAMPLES & DELIVERABLES
+                </span>
+              </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {currentProject.subAssets.map((asset, index) => (
-                <div 
-                  key={asset.id}
-                  onClick={() => setLightboxIndex(index)}
-                  className="group bg-[#12121A] border border-white/5 hover:border-brand-purple/40 rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center min-h-[240px] relative overflow-hidden"
-                >
-                  <img 
-                    src={asset.src} 
-                    alt={asset.name} 
-                    className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition duration-500"
-                  />
-                  {/* গ্যালারি আইকন */}
-                  <svg className="w-8 h-8 text-brand-purple/60 group-hover:text-brand-neon transition mb-4 relative z-10" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                  </svg>
-                  <h4 className="text-white text-sm font-black tracking-wide uppercase relative z-10 group-hover:text-brand-neon transition">{asset.name}</h4>
-                  <span className="text-[10px] text-gray-500 font-medium uppercase mt-1 relative z-10">{asset.label}</span>
-                  
-                  {/* হোভার ইন্ডিকেটর ডট */}
-                  <div className="absolute top-4 right-4 w-5 h-5 rounded-full border border-brand-neon/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                    <div className="w-1.5 h-1.5 bg-brand-neon rounded-full" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {currentProject.subAssets.map((asset, index) => (
+                  <div 
+                    key={asset.id}
+                    onClick={() => setLightboxIndex(index)}
+                    className="group bg-[#12121A] border border-white/5 hover:border-brand-purple/40 rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center min-h-[240px] relative overflow-hidden"
+                  >
+                    <img 
+                      src={asset.src} 
+                      alt={asset.name} 
+                      className="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:opacity-30 transition duration-500"
+                    />
+                    <svg className="w-8 h-8 text-brand-purple/60 group-hover:text-brand-neon transition mb-4 relative z-10" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 00.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                    <h4 className="text-white text-sm font-black tracking-wide uppercase relative z-10 group-hover:text-brand-neon transition">{asset.name}</h4>
+                    <span className="text-[10px] text-gray-500 font-medium uppercase mt-1 relative z-10">{asset.label}</span>
+                    
+                    <div className="absolute top-4 right-4 w-5 h-5 rounded-full border border-brand-neon/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                      <div className="w-1.5 h-1.5 bg-brand-neon rounded-full" />
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* বটম প্রজেক্ট ডেসক্রিপশন প্যানেল */}
-            <div className="mt-12 bg-[#12121A] border border-white/5 rounded-xl p-6 text-left">
-              <h4 className="text-white font-bold text-base uppercase tracking-wider">PROJECT CORE DETAILS</h4>
-              <p className="text-gray-400 text-sm mt-2 leading-relaxed font-light">{currentProject.subDesc}</p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <div className="mt-12 bg-[#12121A] border border-white/5 rounded-xl p-6 text-left">
+                <h4 className="text-white font-bold text-base uppercase tracking-wider">PROJECT CORE DETAILS</h4>
+                <p className="text-gray-400 text-sm mt-2 leading-relaxed font-light">{currentProject.subDesc}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স মডেল স্লাইডার (এক পেজেই নেভিগেট করার জন্য) */}
+      {/* 🖼️ ফুলস্ক্রিন লাইটবক্স মডেল স্লাইডার */}
       <AnimatePresence>
         {lightboxIndex !== null && currentProject && (
           <motion.div 
@@ -214,12 +226,10 @@ export default function PortfolioGrid() {
             onClick={() => setLightboxIndex(null)}
             className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4 md:p-10"
           >
-            {/* ক্লোজ বাটন */}
             <button className="absolute top-6 right-6 text-white/70 hover:text-white text-sm font-bold tracking-widest uppercase bg-white/5 px-4 py-2 rounded border border-white/10">
               CLOSE ×
             </button>
 
-            {/* বামে যাওয়ার অ্যারো বাটন */}
             <button 
               onClick={prevImage}
               className="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-20"
@@ -229,7 +239,6 @@ export default function PortfolioGrid() {
               </svg>
             </button>
 
-            {/* সেন্ট্রাল হাই-রিজোলিউশন ইমেজ কন্টেইনার */}
             <motion.div 
               key={lightboxIndex}
               initial={{ scale: 0.95, opacity: 0 }}
@@ -245,7 +254,6 @@ export default function PortfolioGrid() {
                 className="w-full h-full object-contain rounded-lg shadow-2xl border border-white/10"
               />
               
-              {/* ছবির নিচের কন্টেন্ট প্যানেল */}
               <div className="absolute bottom-[-65px] left-0 right-0 text-center">
                 <h4 className="text-white text-sm md:text-base font-black uppercase tracking-wider">
                   {currentProject.subAssets[lightboxIndex].name}
@@ -256,7 +264,6 @@ export default function PortfolioGrid() {
               </div>
             </motion.div>
 
-            {/* ডানে যাওয়ার অ্যারো বাটন */}
             <button 
               onClick={nextImage}
               className="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-brand-purple hover:border-brand-neon transition-all z-20"
