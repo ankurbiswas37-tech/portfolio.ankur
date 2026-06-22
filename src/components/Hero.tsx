@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-// ৫টি সফটওয়্যার ও স্কিলের হাই-কোয়ালিটি SVG লোগো ডাটা
+// ৫টি সফটওয়্যার ও স্কিলের হাই-কোয়ালিটি SVG লোগো ডাটা
 const techLogos = [
   {
     name: "Photoshop",
@@ -74,6 +74,19 @@ export default function Hero() {
       
       {/* 🔮 ব্যাকগ্রাউন্ড গ্লো এবং মোশন ইফেক্ট */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        
+        {/* 👉 পিসি এবং বড় স্ক্রিনের জন্য ডান পাশে আপনার ব্যাকগ্রাউন্ড ইমেজ (৩০% অপাসিটি) */}
+        <div 
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-[550px] h-[550px] opacity-30 hidden lg:block select-none bg-no-repeat"
+          style={{
+            backgroundImage: "url('/ankur-profile.png')",
+            backgroundSize: 'contain',
+            backgroundPosition: 'right center',
+            WebkitMaskImage: 'radial-gradient(circle at center, black 35%, transparent 80%)',
+            maskImage: 'radial-gradient(circle at center, black 35%, transparent 80%)',
+          }}
+        />
+
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#A855F7]/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#00F5FF]/10 rounded-full blur-[120px]" />
         <div className="absolute top-[20%] right-[15%] w-[300px] h-[300px] bg-[#A855F7]/5 rounded-full blur-[90px]" />
@@ -140,7 +153,7 @@ export default function Hero() {
           <div className="absolute w-[280px] h-[280px] bg-gradient-to-r from-[#A855F7]/10 to-[#00F5FF]/10 rounded-full blur-3xl" />
           <div className="absolute w-[310px] h-[310px] rounded-full border border-white/5 border-dashed pointer-events-none" />
 
-          {/* মেইন ছবি (পিসি ফরম্যাটের জন্য পূর্বের স্থানে ঠিক রাখা হয়েছে) */}
+          {/* মেইন ছবি */}
           <div className="relative w-[240px] h-[240px] lg:w-[280px] lg:h-[280px] rounded-full border border-white/10 overflow-hidden shadow-2xl bg-[#12121A] z-10 group">
             <img 
               src="/ankur-profile.png" 
@@ -182,7 +195,7 @@ export default function Hero() {
         {/* ✍️ ডান পাশ: টেক্সট কন্টেন্ট */}
         <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left relative z-10">
           
-          {/* 🎯 মোবাইল রেসপন্সিভ কাস্টম মার্কড এরিয়া বক্স */}
+          {/* 🎯 মোবাইল রেসপন্সিভ কাস্টম মার্কড এরিয়া বক্স */}
           <div className="relative p-1 rounded-2xl overflow-hidden group">
             
             {/* 👉 শুধুমাত্র মোবাইলে হেডলাইন ও প্যারাগ্রাফের ব্যাকগ্রাউন্ডে ছবি শো করবে (৩০% অপাসিটি এবং স্মুথ ব্লেন্ডিং) */}
@@ -211,7 +224,7 @@ export default function Hero() {
           </p>
           </div>
           
-          {/* বাটন (বক্সের বাইরে রাখা হয়েছে যাতে মোবাইল রেসপন্সে মার্ক করা এরিয়া পারফেক্ট থাকে) */}
+          {/* বাটন */}
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start relative z-10">
             <a href="#portfolio" className="inline-flex items-center justify-center gap-2 bg-[#0B0B0F] border border-[#A855F7]/40 text-white font-medium px-8 py-3.5 rounded-full hover:bg-[#A855F7] hover:border-[#00F5FF] transition uppercase tracking-wider text-sm">
               See My Work 
