@@ -1,4 +1,4 @@
-export const portfolioProject = {
+export default {
   name: 'portfolioProject',
   title: 'Portfolio Projects',
   type: 'document',
