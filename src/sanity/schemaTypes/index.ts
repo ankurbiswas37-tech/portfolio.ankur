@@ -1,4 +1,5 @@
-import { contactSchema } from './contact';
-import portfolioProject from './project'; // 👈 কার্লি ব্র্যাকেট ছাড়া ক্লিন ইম্পোর্ট
+import contact from './contact';
+import portfolioProject from './project';
+import categoryConfig from './category';
 
-export const schemaTypes = [contactSchema, portfolioProject];
+export const schemaTypes = [contact, portfolioProject, categoryConfig];
