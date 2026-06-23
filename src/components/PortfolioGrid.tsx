@@ -11,10 +11,14 @@ const targetProjects = [
     tag: "BRANDING",
     image: "/brand identity.png", 
     subDesc: "Premium corporate branding suites, visual identity systems, and brand guidelines crafted across commercial industries.",
-    // 🎯 স্ক্রিনশটের প্রজেক্ট অনুযায়ী ৬টি নির্দিষ্ট ব্র্যান্ড কালেকশন ম্যাপিং
     subCategories: [
       {
-        id: 1, name: "FARWELL + GERVASE", label: "Asset #1", cover: "/f&g_logo.png",
+        id: 1, 
+        name: "FARWELL + GERVASE", 
+        label: "Asset #1", 
+        cover: "/f&g_logo.png",
+        website: "www.farwellgervase.com",
+        description: "A premium luxury heritage brand specializing in bespoke advisory and high-end corporate consulting. The visual system focuses on timeless elegance, utilizing structured grid lines and a classic monochrome base palette.",
         nestedImages: [
           { name: "F&G Logo Usage Sheet", src: "/f&g_logo.png" },
           { name: "F&G Brand Palette Spec", src: "/brand_identity_2.png" },
@@ -25,58 +29,83 @@ const targetProjects = [
         ]
       },
       {
-        id: 2, name: "DGM CONTRACTING", label: "Asset #2", cover: "/dmg_logo.png",
+        id: 2, 
+        name: "DGM CONTRACTING", 
+        label: "Asset #2", 
+        cover: "/dmg_logo.png",
+        website: "www.dgmcontracting.com",
+        description: "A heavy-duty industrial construction and infrastructure contracting firm. The branding project delivers an impactful corporate design language, emphasizing stability, structural strength, and high-contrast visibility.",
         nestedImages: [
           { name: "DGM Identity Logo Sheet", src: "/dmg_logo.png" },
-          { name: "DGM Color Variant Layout", src: "/brand_identity_2.png" },
-          { name: "DGM Visual Typography Rules", src: "/brand_identity_4.png" },
-          { name: "DGM Executive Business Card", src: "/brand_identity_5.png" },
-          { name: "DGM Premium Corporate Asset", src: "/brand_identity_3.png" },
-          { name: "DGM Pattern Application Spec", src: "/brand_identity_6.png" }
+          { name: "DGM Luxury Color Palette", src: "/dmg_logo2.png" },
+          { name: "DGM Brand Guidelines Manual", src: "/dmg_logo3.png" },
+          { name: "DGM Interior Typography Specimen", src: "/dmg_logo4.png" },
+          { name: "DGM Executive Business Card Mockup", src: "/dmg_logo5.png" },
+          { name: "DGM Premium Folder Pattern Design", src: "/dmg_logo6.png" }
         ]
       },
       {
-        id: 3, name: "INFINIX SYSTEMS", label: "Asset #3", cover: "/infinix_logo.png",
+        id: 3, 
+        name: "INFINIX SYSTEMS", 
+        label: "Asset #3", 
+        cover: "/infinix_logo.png",
+        website: "www.infinixsystems.io",
+        description: "A cutting-edge software solutions and tech automation provider. The visual identity incorporates dynamic geometry, futuristic typography, and precise alignment schemes to represent tech innovation and digital security platforms.",
         nestedImages: [
           { name: "Infinix Identity Guidelines Overview", src: "/infinix_logo.png" },
-          { name: "Infinix Clearance Diagram Rules", src: "/brand_identity_3.png" },
-          { name: "Infinix Color System Spectrum", src: "/brand_identity_2.png" },
-          { name: "Infinix Accent Branding Element", src: "/brand_identity_6.png" },
-          { name: "Infinix Stationery Mockup Grid", src: "/brand_identity_5.png" },
-          { name: "Infinix Core Typography Deck", src: "/brand_identity_4.png" }
+          { name: "Infinix Color Palette Spectrum", src: "/infinix_logo2.png" },
+          { name: "Infinix Clear Space Diagram Rules", src: "/infinix_logo3.png" },
+          { name: "Infinix Core Typography Deck", src: "/infinix_logo4.png" },
+          { name: "Infinix Stationery Mockup Grid", src: "/infinix_logo5.png" },
+          { name: "Infinix Accent Branding Element", src: "/infinix_logo6.png" }
         ]
       },
       {
-        id: 4, name: "HOMEVY PLATFORM", label: "Asset #4", cover: "/homvay_logo.png",
+        id: 4, 
+        name: "HOMEVY PLATFORM", 
+        label: "Asset #4", 
+        cover: "/homvay_logo.png",
+        website: "www.homevyplatform.net",
+        description: "A modern property management and luxury real estate portal. The visual aesthetics are designed to feel clean, minimal, and highly professional, utilizing premium architectural accents and spacious typography.",
         nestedImages: [
-          { name: "Homevy Brand Identity Manual", src: "/homvay_logo.png" },
-          { name: "Homevy Real Estate Color Spec", src: "/brand_identity_2.png" },
-          { name: "Homevy Digital UI Asset Sheet", src: "/brand_identity_3.png" },
-          { name: "Homevy Architecture Type System", src: "/brand_identity_4.png" },
-          { name: "Homevy Corporate Station Grid", src: "/brand_identity_5.png" },
-          { name: "Homevy Production Seamless Mark", src: "/brand_identity_6.png" }
+          { name: "Homevy Brand Identity Sheet", src: "/homvay_logo.png" },
+          { name: "Homevy Real Estate Color Spectrum", src: "/homvay_logo2.png" },
+          { name: "Homevy Identity Guidelines Manual", src: "/homvay_logo3.png" },
+          { name: "Homevy Property Alphabet Typography", src: "/homvay_logo4.png" },
+          { name: "Homevy Agent Business Card Design", src: "/homvay_logo5.png" },
+          { name: "Homevy Luxury Property Brochure Pattern", src: "/homvay_logo6.png" }
         ]
       },
       {
-        id: 5, name: "DAVID ALLEN CAPITAL", label: "Asset #5", cover: "/dac_logo.png",
+        id: 5, 
+        name: "DAVID ALLEN CAPITAL", 
+        label: "Asset #5", 
+        cover: "/dac_logo.png",
+        website: "www.davidallencapital.com",
+        description: "An elite commercial business funding and financial advisory firm. The branding architecture revolves around trust, authority, and premium corporate aesthetics, using sharp geometric patterns and financial typography assets.",
         nestedImages: [
           { name: "DAC Business Funding Logo Vault", src: "/dac_logo.png" },
-          { name: "DAC Corporate Spectrum Sheet", src: "/brand_identity_2.png" },
-          { name: "DAC Production Signage Manual", src: "/brand_identity_3.png" },
-          { name: "DAC Marketing Type Parameters", src: "/brand_identity_4.png" },
-          { name: "DAC Executive Business Stationery", src: "/brand_identity_5.png" },
-          { name: "DAC Seamless Commercial Blueprint", src: "/brand_identity_6.png" }
+          { name: "DAC Corporate Color Spectrum", src: "/dac_logo2.png" },
+          { name: "DAC Brand Guidelines Manual", src: "/dac_logo3.png" },
+          { name: "DAC Corporate Finance Typography", src: "/dac_logo4.png" },
+          { name: "DAC Account Executive Business Card", src: "/dac_logo5.png" },
+          { name: "DAC Premium Notebook & Pattern Design", src: "/dac_logo6.png" }
         ]
       },
       {
-        id: 6, name: "VE+ SOLUTIONS", label: "Asset #6", cover: "/ve+_logo.png",
+        id: 6, 
+        name: "VE+ SOLUTIONS", 
+        label: "Asset #6", 
+        cover: "/ve+_logo.png",
+        website: "www.veplusaudit.com",
+        description: "A specialized cost auditing, analytics, and business scaling consultancy. The complete branding suite utilizes sleek geometric lines and structured cost-architecture layouts to showcase operational precision and clarity.",
         nestedImages: [
           { name: "VE+ Cost Auditing Mockup Sheet", src: "/ve+_logo.png" },
-          { name: "VE+ Electric Blue Color Palette", src: "/brand_identity_2.png" },
-          { name: "VE+ Corporate Guidelines Layout", src: "/brand_identity_3.png" },
-          { name: "VE+ Geometry Type Treatment", src: "/brand_identity_4.png" },
-          { name: "VE+ Professional Business Card", src: "/brand_identity_5.png" },
-          { name: "VE+ Cost Architecture Pattern", src: "/brand_identity_6.png" }
+          { name: "VE+ Brand Color Palette", src: "/ve+_logo2.png" },
+          { name: "VE+ Corporate Guidelines Layout", src: "/ve+_logo3.png" },
+          { name: "VE+ Geometry Type Treatment", src: "/ve+_logo4.png" },
+          { name: "VE+ Professional Business Card", src: "/ve+_logo5.png" },
+          { name: "VE+ Cost Architecture Pattern", src: "/ve+_logo6.png" }
         ]
       }
     ]
@@ -125,7 +154,7 @@ export default function PortfolioGrid() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const currentProject = targetProjects.find(p => p.slug === activeSlug);
-  const currentSub = currentProject?.subCategories.find(s => s.id === activeSubId);
+  const currentSub = currentProject?.subCategories?.find(s => s.id === activeSubId);
 
   const handleMainCardClick = (slug: string) => {
     if (activeSlug === slug) {
@@ -151,6 +180,15 @@ export default function PortfolioGrid() {
     }
   };
 
+  // কন্টাক্ট বা প্রজেক্ট ফর্মে অটো স্ক্রোলের কাস্টম হ্যান্ডলার
+  const handleCtaScroll = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const nextImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (currentSub && lightboxIndex !== null) {
@@ -166,7 +204,7 @@ export default function PortfolioGrid() {
   };
 
   return (
-    <section className="w-full py-24 bg-[#0B0B0F] px-6 select-none" id="portfolio">
+    <section className="w-full py-24 bg-[#0B0B0F] px-6 select-none relative" id="portfolio">
       
       {/* 🧠 হেডলাইন */}
       <div className="max-w-7xl mx-auto text-center mb-16">
@@ -192,7 +230,7 @@ export default function PortfolioGrid() {
             <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden">
               <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
             </div>
-            <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
+            h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
             <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
           </div>
         ))}
@@ -230,16 +268,34 @@ export default function PortfolioGrid() {
         </AnimatePresence>
       </div>
 
-      {/* 🔓 সেকশন ৩: সিলেক্ট করা ব্র্যান্ডের নির্দিষ্ট ৬টি গাইডলাইন ইমেজ গ্রিড */}
+      {/* 🔓 সেকশন ৩: সিলেক্ট করা ব্র্যান্ডের নির্দিষ্ট ৬টি গাইডলাইন ইমেজ গ্রিড + ডেসক্রিপশন এবং ওয়েবসাইট */}
       <div id="nested-images-section" className="scroll-mt-24 mt-16">
         <AnimatePresence mode="wait">
           {activeSubId && currentSub && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/5 pt-12">
-              <div className="text-left mb-8">
-                <h4 className="text-xl font-black text-brand-neon uppercase tracking-wider">{currentSub.name} SYSTEM LABS</h4>
-                <p className="text-gray-500 text-xs mt-1 font-light">Click on any deliverable asset below to launch immersive lightbox preview.</p>
+              
+              {/* 📝 ডাইনামিক ডেসক্রিপশন ও লাইভ ওয়েবসাইট লিংক সেকশন */}
+              <div className="bg-[#12121A] border border-white/5 p-6 rounded-xl mb-10 text-left">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
+                  <h4 className="text-xl font-black text-brand-neon uppercase tracking-wider">{currentSub.name} SYSTEM LABS</h4>
+                  {currentSub.website && (
+                    <a 
+                      href={`https://${currentSub.website}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-xs font-bold text-brand-purple hover:text-brand-neon bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded border border-white/10 transition duration-200 uppercase tracking-widest inline-block w-fit"
+                    >
+                      🔗 {currentSub.website}
+                    </a>
+                  )}
+                </div>
+                {currentSub.description && (
+                  <p className="text-gray-400 text-sm font-light leading-relaxed max-w-4xl">{currentSub.description}</p>
+                )}
+                <p className="text-gray-500 text-[11px] mt-4 font-light border-t border-white/5 pt-3">Click on any deliverable asset below to launch immersive lightbox preview.</p>
               </div>
 
+              {/* গ্রিড ইমেজসমূহ */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {currentSub.nestedImages.map((imgObj, idx) => (
                   <div 
@@ -257,6 +313,29 @@ export default function PortfolioGrid() {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
+
+      {/* 🔮 সেকশন ৪: প্রিমিয়াম স্টেডি গ্লোয়িং CTA বুকিং কল বাটন (Start Your Project লিঙ্কের সাথে ইন্টিগ্রেটেড) */}
+      <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col items-center justify-center text-center">
+        <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-wider">
+          Ready to Elevate <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon">Your Brand Identity?</span>
+        </h3>
+        <p className="text-gray-400 text-xs md:text-sm font-light mt-2 max-w-lg leading-relaxed">
+          Let’s discuss your design systems, high-retention visual assets, and marketing funnel automations.
+        </p>
+        
+        <div className="mt-8">
+          <a 
+            href="#contact" 
+            onClick={handleCtaScroll} // 👈 হিরো সেকশনের "Start Your Project" লিঙ্কের মতোই স্মুথ স্ক্রোল ট্রিগার করবে ভাই
+            className="inline-flex items-center justify-center gap-2 bg-[#0B0B0F] border border-brand-neon text-white font-bold px-10 py-4 rounded-full transition duration-300 uppercase tracking-widest text-xs shadow-[0_0_15px_rgba(0,245,255,0.15)] hover:shadow-[0_0_25px_rgba(0,245,255,0.4)] hover:bg-brand-neon hover:text-black"
+          >
+            Book a Discovery Call
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </div>
       </div>
 
       {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স স্লাইডার */}
