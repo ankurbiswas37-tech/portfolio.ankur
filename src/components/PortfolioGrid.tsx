@@ -118,9 +118,9 @@ const targetProjects = [
     image: "/video editing.png", 
     subDesc: "Engaging commercial ads and high-retention social content built with precision.",
     subCategories: [
-      { id: 1, name: "COLOR GRADING", label: "Asset #1", cover: "/video_editing_1.png", nestedImages: [{ name: "Grade 1", src: "/video_editing_1.png" }, { name: "Grade 2", src: "/video_editing_2.png" }, { name: "Grade 3", src: "/video_editing_3.png" }, { name: "Grade 4", src: "/video_editing_4.png" }, { name: "Grade 5", src: "/video_editing_5.png" }, { name: "Grade 6", src: "/video_editing_6.png" }] },
-      { id: 2, name: "TIMELINE", label: "Asset #2", cover: "/video_editing_2.png", nestedImages: [{ name: "Cut 1", src: "/video_editing_2.png" }, { name: "Cut 2", src: "/video_editing_1.png" }, { name: "Cut 3", src: "/video_editing_3.png" }, { name: "Cut 4", src: "/video_editing_4.png" }, { name: "Cut 5", src: "/video_editing_5.png" }, { name: "Cut 6", src: "/video_editing_6.png" }] },
-      { id: 3, name: "MOTION GRAPHICS", label: "Asset #3", cover: "/video_editing_3.png", nestedImages: [{ name: "FX 1", src: "/video_editing_3.png" }, { name: "FX 2", src: "/video_editing_1.png" }, { name: "FX 3", src: "/video_editing_2.png" }, { name: "FX 4", src: "/video_editing_4.png" }, { name: "FX 5", src: "/video_editing_5.png" }, { name: "FX 6", src: "/video_editing_6.png" }] }
+      { id: 1, name: "COLOR GRADING", label: "Asset #1", cover: "/video_editing_1.png", website: "", description: "", nestedImages: [{ name: "Grade 1", src: "/video_editing_1.png" }, { name: "Grade 2", src: "/video_editing_2.png" }, { name: "Grade 3", src: "/video_editing_3.png" }, { name: "Grade 4", src: "/video_editing_4.png" }, { name: "Grade 5", src: "/video_editing_5.png" }, { name: "Grade 6", src: "/video_editing_6.png" }] },
+      { id: 2, name: "TIMELINE", label: "Asset #2", cover: "/video_editing_2.png", website: "", description: "", nestedImages: [{ name: "Cut 1", src: "/video_editing_2.png" }, { name: "Cut 2", src: "/video_editing_1.png" }, { name: "Cut 3", src: "/video_editing_3.png" }, { name: "Cut 4", src: "/video_editing_4.png" }, { name: "Cut 5", src: "/video_editing_5.png" }, { name: "Cut 6", src: "/video_editing_6.png" }] },
+      { id: 3, name: "MOTION GRAPHICS", label: "Asset #3", cover: "/video_editing_3.png", website: "", description: "", nestedImages: [{ name: "FX 1", src: "/video_editing_3.png" }, { name: "FX 2", src: "/video_editing_1.png" }, { name: "FX 3", src: "/video_editing_2.png" }, { name: "FX 4", src: "/video_editing_4.png" }, { name: "FX 5", src: "/video_editing_5.png" }, { name: "FX 6", src: "/video_editing_6.png" }] }
     ]
   },
   { 
@@ -131,8 +131,8 @@ const targetProjects = [
     image: "/digital design.png", 
     subDesc: "High-end social media assets, marketing web pages, and custom digital assets.",
     subCategories: [
-      { id: 1, name: "SOCIAL MEDIA DESIGN", label: "Asset #1", cover: "/digital_design_1.png", nestedImages: [{ name: "Social 1", src: "/digital_design_1.png" }, { name: "Social 2", src: "/digital_design_2.png" }, { name: "Social 3", src: "/digital_design_3.png" }, { name: "Social 4", src: "/digital_design_4.png" }, { name: "Social 5", src: "/digital_design_5.png" }, { name: "Social 6", src: "/digital_design_6.png" }] },
-      { id: 2, name: "WEB BANNER", label: "Asset #2", cover: "/digital_design_2.png", nestedImages: [{ name: "Banner 1", src: "/digital_design_2.png" }, { name: "Banner 2", src: "/digital_design_1.png" }, { name: "Banner 3", src: "/digital_design_3.png" }, { name: "Banner 4", src: "/digital_design_4.png" }, { name: "Banner 5", src: "/digital_design_5.png" }, { name: "Banner 6", src: "/digital_design_6.png" }] }
+      { id: 1, name: "SOCIAL MEDIA DESIGN", label: "Asset #1", cover: "/digital_design_1.png", website: "", description: "", nestedImages: [{ name: "Social 1", src: "/digital_design_1.png" }, { name: "Social 2", src: "/digital_design_2.png" }, { name: "Social 3", src: "/digital_design_3.png" }, { name: "Social 4", src: "/digital_design_4.png" }, { name: "Social 5", src: "/digital_design_5.png" }, { name: "Social 6", src: "/digital_design_6.png" }] },
+      { id: 2, name: "WEB BANNER", label: "Asset #2", cover: "/digital_design_2.png", website: "", description: "", nestedImages: [{ name: "Banner 1", src: "/digital_design_2.png" }, { name: "Banner 2", src: "/digital_design_1.png" }, { name: "Banner 3", src: "/digital_design_3.png" }, { name: "Banner 4", src: "/digital_design_4.png" }, { name: "Banner 5", src: "/digital_design_5.png" }, { name: "Banner 6", src: "/digital_design_6.png" }] }
     ]
   },
   { 
@@ -143,7 +143,7 @@ const targetProjects = [
     image: "/GHL funnel Build.png", 
     subDesc: "High-converting GoHighLevel landing pages, SaaS sub-account setup, and triggers.",
     subCategories: [
-      { id: 1, name: "LANDING PAGE", label: "Asset #1", cover: "/ghl_funnel_1.png", nestedImages: [{ name: "Page 1", src: "/ghl_funnel_1.png" }, { name: "Page 2", src: "/ghl_funnel_2.png" }, { name: "Page 3", src: "/ghl_funnel_3.png" }, { name: "Page 4", src: "/ghl_funnel_4.png" }, { name: "Page 5", src: "/ghl_funnel_5.png" }, { name: "Page 6", src: "/ghl_funnel_6.png" }] }
+      { id: 1, name: "LANDING PAGE", label: "Asset #1", cover: "/ghl_funnel_1.png", website: "", description: "", nestedImages: [{ name: "Page 1", src: "/ghl_funnel_1.png" }, { name: "Page 2", src: "/ghl_funnel_2.png" }, { name: "Page 3", src: "/ghl_funnel_3.png" }, { name: "Page 4", src: "/ghl_funnel_4.png" }, { name: "Page 5", src: "/ghl_funnel_5.png" }, { name: "Page 6", src: "/ghl_funnel_6.png" }] }
     ]
   },
 ];
@@ -229,7 +229,6 @@ export default function PortfolioGrid() {
             <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden">
               <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
             </div>
-            {/* 🎯 ফিক্সড: ব্র্যাকেটহীন টাইপো পুরোপুরি রিমুভ করে স্ট্যান্ডার্ড JSX করা হয়েছে */}
             <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
             <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
           </div>
