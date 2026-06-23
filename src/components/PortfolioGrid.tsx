@@ -180,6 +180,14 @@ export default function PortfolioGrid() {
     }
   };
 
+  const handleCtaScroll = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const nextImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (currentSub && lightboxIndex !== null) {
@@ -221,6 +229,7 @@ export default function PortfolioGrid() {
             <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden">
               <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
             </div>
+            {/* 🎯 ফিক্সড: এখানে ওপেনিং ব্র্যাকেট < যুক্ত করা হয়েছে */}
             <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
             <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
           </div>
@@ -317,7 +326,8 @@ export default function PortfolioGrid() {
         
         <div className="mt-8">
           <a 
-            href="#contact" // 👈 আপনার কন্টাক্ট ফর্ম আইডি অথবা এখানে Calendly লিংক বসাতে পারেন ভাই
+            href="#contact" 
+            onClick={handleCtaScroll} 
             className="inline-flex items-center justify-center gap-2 bg-[#0B0B0F] border border-brand-neon text-white font-bold px-10 py-4 rounded-full transition duration-300 uppercase tracking-widest text-xs shadow-[0_0_15px_rgba(0,245,255,0.15)] hover:shadow-[0_0_25px_rgba(0,245,255,0.4)] hover:bg-brand-neon hover:text-black"
           >
             Book a Discovery Call
