@@ -229,7 +229,7 @@ export default function PortfolioGrid() {
             <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden">
               <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
             </div>
-            {/* 🎯 ফিক্সড: এখানে ওপেনিং ব্র্যাকেট < যুক্ত করা হয়েছে */}
+            {/* 🎯 ফিক্সড: ব্র্যাকেটহীন টাইপো পুরোপুরি রিমুভ করে স্ট্যান্ডার্ড JSX করা হয়েছে */}
             <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
             <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
           </div>
@@ -268,13 +268,13 @@ export default function PortfolioGrid() {
         </AnimatePresence>
       </div>
 
-      {/* 🔓 সেকশন ৩: সিলেক্ট করা ব্র্যান্ডের নির্দিষ্ট ৬টি গাইডলাইন ইমেজ গ্রিড + ডেসক্রিপশন এবং ওয়েবসাইট */}
+      {/* 🔓 সেকশন ৩: সিলেক্ট করা ব্র্যান্ডের নির্দিষ্ট ৬টি গাইডলাইন ইমেজ গ্রিড + ডেসক্রিপশন এবং ওয়েবসাইট */}
       <div id="nested-images-section" className="scroll-mt-24 mt-16">
         <AnimatePresence mode="wait">
           {activeSubId && currentSub && (
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/5 pt-12">
               
-              {/* 📝 ডাইনামিক ডেসক্রিপশন ও লাইভ ওয়েবসাইট লিংক সেকশন */}
+              {/* 📝 ডাইনামিক ডেসক্রিপশন ও লাইভ ওয়েবসাইট লিংক সেকশন */}
               <div className="bg-[#12121A] border border-white/5 p-6 rounded-xl mb-10 text-left">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
                   <h4 className="text-xl font-black text-brand-neon uppercase tracking-wider">{currentSub.name} SYSTEM LABS</h4>
@@ -338,7 +338,7 @@ export default function PortfolioGrid() {
         </div>
       </div>
 
-      {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স স্লাইডার */}
+      {/* 🖼️ ফুলস্ক্রিন প্রিমিয়াম লাইটবক্স স্লাইডার */}
       <AnimatePresence>
         {lightboxIndex !== null && currentSub && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightboxIndex(null)} className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4">
