@@ -180,15 +180,6 @@ export default function PortfolioGrid() {
     }
   };
 
-  // কন্টাক্ট বা প্রজেক্ট ফর্মে অটো স্ক্রোলের কাস্টম হ্যান্ডলার
-  const handleCtaScroll = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   const nextImage = (e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (currentSub && lightboxIndex !== null) {
@@ -230,7 +221,7 @@ export default function PortfolioGrid() {
             <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden">
               <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-70" />
             </div>
-            h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
+            <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
             <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
           </div>
         ))}
@@ -315,7 +306,7 @@ export default function PortfolioGrid() {
         </AnimatePresence>
       </div>
 
-      {/* 🔮 সেকশন ৪: প্রিমিয়াম স্টেডি গ্লোয়িং CTA বুকিং কল বাটন (Start Your Project লিঙ্কের সাথে ইন্টিগ্রেটেড) */}
+      {/* 🔮 সেকশন ৪: প্রিমিয়াম স্টেডি গ্লোয়িং CTA বুকিং কল বাটন */}
       <div className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-col items-center justify-center text-center">
         <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-wider">
           Ready to Elevate <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon">Your Brand Identity?</span>
@@ -326,8 +317,7 @@ export default function PortfolioGrid() {
         
         <div className="mt-8">
           <a 
-            href="#contact" 
-            onClick={handleCtaScroll} // 👈 হিরো সেকশনের "Start Your Project" লিঙ্কের মতোই স্মুথ স্ক্রোল ট্রিগার করবে ভাই
+            href="#contact" // 👈 আপনার কন্টাক্ট ফর্ম আইডি অথবা এখানে Calendly লিংক বসাতে পারেন ভাই
             className="inline-flex items-center justify-center gap-2 bg-[#0B0B0F] border border-brand-neon text-white font-bold px-10 py-4 rounded-full transition duration-300 uppercase tracking-widest text-xs shadow-[0_0_15px_rgba(0,245,255,0.15)] hover:shadow-[0_0_25px_rgba(0,245,255,0.4)] hover:bg-brand-neon hover:text-black"
           >
             Book a Discovery Call
