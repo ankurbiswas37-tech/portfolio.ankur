@@ -1,13 +1,12 @@
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
-import { contactSchema } from './src/sanity/schemaTypes/contact';
+import { schemaTypes } from './src/sanity/schemaTypes'; // 👈 আমরা সরাসরি ইনডেক্স ফাইল থেকে সব স্কিমা নিয়ে আসছি
 
 export default defineConfig({
   name: 'default',
   title: 'CreativeEdge Studio',
 
-  // 🎯 আপনার ড্যাশবোর্ডের আসল প্রোজেক্ট আইডি এখানে বসাবেন (যেমন: 'p9x24abc')
-  // অথবা আপনার .env.local ফাইলে থাকা আইডিটি নিচে সরাসরি পেস্ট করে দিন:
+  // আপনার আসল প্রজেক্ট আইডি এবং এনভায়রনমেন্ট ভেরিয়েবল
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'আপনার_আসল_আইডি_এখানে_বসাবেন', 
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
 
@@ -16,6 +15,6 @@ export default defineConfig({
   plugins: [structureTool()],
 
   schema: {
-    types: [contactSchema],
+    types: schemaTypes, // 👈 এখানে contactSchema-র বদলে schemaTypes হবে, যা সব স্কিমা লোড করবে
   },
 });
