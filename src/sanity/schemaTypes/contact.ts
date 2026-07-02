@@ -7,19 +7,19 @@ export const contactSchema = {
       name: 'name',
       title: 'Client Name',
       type: 'string',
-      readOnly: true,
+      readonly: true,
     },
     {
       name: 'email',
       title: 'Client Email',
       type: 'string',
-      readOnly: true,
+      readonly: true,
     },
     {
       name: 'details',
       title: 'Project Details / Message',
       type: 'text',
-      readOnly: true,
+      readonly: true,
     },
     {
       name: 'createdAt',
@@ -27,9 +27,7 @@ export const contactSchema = {
       type: 'datetime',
       options: {
         dateFormat: 'YYYY-MM-DD',
-        timeFormat: 'HH:mm',
       },
-      readOnly: true,
-    }
-  ]
-};
+    },
+  ],
+}

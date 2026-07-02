@@ -1,5 +1,5 @@
-import contact from './contact';
+import { contactSchema } from './contact';
 import portfolioProject from './project';
 import categoryConfig from './category';
 
-export const schemaTypes = [contact, portfolioProject, categoryConfig];
+export const schemaTypes = [contactSchema, portfolioProject, categoryConfig];
