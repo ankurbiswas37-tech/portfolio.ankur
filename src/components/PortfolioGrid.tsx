@@ -77,7 +77,7 @@ export default function PortfolioGrid() {
           "customCover": coverImage.asset->url
         }`;
 
-        // সেফ ডাটা ফেচিং (কোনো একটি কুয়েরি ফাঁকা থাকলেও যেন ফ্রন্টএন্ড ক্র্যাশ না করে)
+        // সেফ ডাটা ফেচিং
         const rawData = await client.fetch(projectQuery).catch(() => []);
         const customCategories = await client.fetch(categoryQuery).catch(() => []);
 
@@ -95,7 +95,6 @@ export default function PortfolioGrid() {
               nestedImages: item.nestedImages || []
             }));
 
-          // ডাটা না থাকলে লোকাল ডিফল্ট ইমেজ সেফগার্ড
           const customCoverObj = (customCategories || []).find((cat: any) => cat && cat.slug === section.slug);
           const finalCoverImage = customCoverObj?.customCover || (matchedSubs.length > 0 ? matchedSubs[0].cover : section.image);
 
@@ -110,7 +109,6 @@ export default function PortfolioGrid() {
         setLoading(false);
       } catch (error) {
         console.error("Sanity Fetch Error:", error);
-        // ক্র্যাশ এড়াতে ফ্যালব্যাক ডাটা সেট করা
         const fallbackData = mainSectionsConfig.map(section => ({ ...section, subCategories: [] }));
         setPortfolioData(fallbackData);
         setLoading(false);
@@ -143,11 +141,15 @@ export default function PortfolioGrid() {
               onClick={() => {
                 setActiveSlug(isSelected ? null : project.slug);
                 setActiveSubId(null);
-                // ক্লিক করার পর সাব-কন্টেন্টে স্মুথ স্ক্রোলের জন্য জাস্ট একটা ডিলে ট্রিগার
+                
+                // 🎯 স্ক্রোল ফিক্স: ফ্রেমার মোশন অ্যানিমেশনের লোড টাইম (২৫০ মিলিগ্রাম ডিলে) হিসাব করে স্মুথ স্ক্রোল হবে
                 if (!isSelected) {
                   setTimeout(() => {
-                    document.getElementById('vault-section')?.scrollIntoView({ behavior: 'smooth' });
-                  }, 100);
+                    const vaultEl = document.getElementById('vault-section');
+                    if (vaultEl) {
+                      vaultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 250); 
                 }
               }}
               key={index} 
