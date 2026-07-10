@@ -9,7 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Project Name / Company Title',
       type: 'string',
-      description: 'e.g., FARWELL + GERVASE or COLOR GRADING',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'mainCategory',
@@ -23,39 +23,55 @@ export default defineType({
           { title: 'GHL Funnel Builder', value: 'ghl-funnel-builder' },
         ],
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'label',
-      title: 'Asset Label',
+      title: 'Asset Label (e.g., Asset #1, Ads, Short-form)',
       type: 'string',
-      description: 'e.g., Asset #1, Asset #2',
     }),
     defineField({
       name: 'cover',
-      title: 'Cover Image',
+      title: 'Cover Image (Thumbnail)',
       type: 'image',
       options: { hotspot: true },
+      validation: (Rule) => Rule.required(),
     }),
+    
+    /* 🎬 ভিডিওর জন্য নতুন সেকশন গ্রুপিং */
     defineField({
-      name: 'website',
-      title: 'Website URL (Optional)',
+      name: 'videoType',
+      title: 'Video Source Type',
       type: 'string',
-      description: 'Only for Brand Identity or Website links',
+      options: {
+        list: [
+          { title: 'None (Image Gallery Only)', value: 'none' },
+          { title: 'YouTube / Vimeo URL', value: 'url' },
+          { title: 'Direct MP4 File Upload', value: 'file' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'none',
     }),
     defineField({
       name: 'videoUrl',
-      title: 'Video URL (Optional)',
+      title: 'YouTube / Vimeo Video URL',
       type: 'url',
-      description: 'YouTube/Vimeo links (Only for Video section)',
+      hidden: ({ parent }) => parent?.videoType !== 'url',
     }),
     defineField({
-      name: 'description',
-      title: 'Project Description',
-      type: 'text',
+      name: 'videoFile',
+      title: 'Upload Direct MP4 Video File',
+      type: 'file',
+      options: {
+        accept: 'video/mp4,video/x-m4v,video/*'
+      },
+      hidden: ({ parent }) => parent?.videoType !== 'file',
     }),
+
     defineField({
       name: 'nestedImages',
-      title: 'Gallery Images / Assets',
+      title: 'Gallery Images / Assets (For Image Grids)',
       type: 'array',
       of: [
         {
@@ -65,11 +81,12 @@ export default defineType({
             {
               name: 'name',
               type: 'string',
-              title: 'Asset Name / Caption',
+              title: 'Asset Caption / Name',
             },
           ],
         },
       ],
+      hidden: ({ parent }) => parent?.videoType === 'file' || parent?.videoType === 'url',
     }),
   ],
 });
