@@ -57,7 +57,6 @@ export default function PortfolioGrid() {
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
-        // 🔍 ১. প্রজেক্ট এবং কাস্টম ক্যাটাগরি কভার দুটোই একসাথে নিয়ে আসার কুয়েরি
         const projectQuery = `*[_type == "portfolioProject"]{
           _id,
           title,
@@ -78,29 +77,26 @@ export default function PortfolioGrid() {
           "customCover": coverImage.asset->url
         }`;
 
-        // একসাথে প্যারালাল ডাটা ফেচিং
-        const [rawData, customCategories] = await Promise.all([
-          client.fetch(projectQuery),
-          client.fetch(categoryQuery)
-        ]);
+        // সেফ ডাটা ফেচিং (কোনো একটি কুয়েরি ফাঁকা থাকলেও যেন ফ্রন্টএন্ড ক্র্যাশ না করে)
+        const rawData = await client.fetch(projectQuery).catch(() => []);
+        const customCategories = await client.fetch(categoryQuery).catch(() => []);
 
-        // 🧠 ২. সানিটির ডাটাকে মেইন ক্যাটাগরির সাথে নিখুঁতভাবে ম্যাপিং
         const formattedData = mainSectionsConfig.map(section => {
-          const matchedSubs = rawData
-            .filter((item: any) => item.mainCategory === section.slug)
+          const matchedSubs = (rawData || [])
+            .filter((item: any) => item && item.mainCategory === section.slug)
             .map((item: any) => ({
               id: item._id,
               name: item.title,
               label: item.label || "Asset Component",
-              cover: item.cover,
+              cover: item.cover || section.image,
               website: item.website || "",
               videoUrl: item.videoUrl || "",
               description: item.description || "",
               nestedImages: item.nestedImages || []
             }));
 
-          // কাস্টম ক্যাটাগরি কভার চেক করা -> না থাকলে প্রথম প্রজেক্টের ইমেজ -> না থাকলে লোকাল ডিফল্ট ইমেজ
-          const customCoverObj = customCategories.find((cat: any) => cat.slug === section.slug);
+          // ডাটা না থাকলে লোকাল ডিফল্ট ইমেজ সেফগার্ড
+          const customCoverObj = (customCategories || []).find((cat: any) => cat && cat.slug === section.slug);
           const finalCoverImage = customCoverObj?.customCover || (matchedSubs.length > 0 ? matchedSubs[0].cover : section.image);
 
           return {
@@ -114,6 +110,9 @@ export default function PortfolioGrid() {
         setLoading(false);
       } catch (error) {
         console.error("Sanity Fetch Error:", error);
+        // ক্র্যাশ এড়াতে ফ্যালব্যাক ডাটা সেট করা
+        const fallbackData = mainSectionsConfig.map(section => ({ ...section, subCategories: [] }));
+        setPortfolioData(fallbackData);
         setLoading(false);
       }
     };
@@ -122,15 +121,6 @@ export default function PortfolioGrid() {
   }, []);
 
   const currentProject = portfolioData.find(p => p.slug === activeSlug);
-  const currentSub = currentProject?.subCategories?.find(s => s.id === activeSubId);
-
-  if (loading) {
-    return (
-      <div className="w-full py-32 bg-[#0B0B0F] flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-brand-neon border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
 
   return (
     <section className="w-full py-24 bg-[#0B0B0F] px-6 select-none relative" id="portfolio">
@@ -146,62 +136,82 @@ export default function PortfolioGrid() {
 
       {/* 🎴 ওপরে থাকা মেইন ৪টি বড় সেকশন কার্ড */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-        {portfolioData.map((project, index) => (
-          <div 
-            onClick={() => {
-              setActiveSlug(activeSlug === project.slug ? null : project.slug);
-              setActiveSubId(null);
-            }}
-            key={index} 
-            className={`cursor-pointer rounded-xl p-5 border transition-all duration-300 block text-left ${
-              activeSlug === project.slug ? 'bg-[#151522] border-brand-neon shadow-glow' : 'bg-[#12121A] border-white/5 hover:border-brand-neon/40'
-            }`}
-          >
-            <span className="text-[10px] font-bold text-gray-500 tracking-widest block mb-4 uppercase">{project.tag}</span>
-            <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden">
-              <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-80 transition-all duration-300 group-hover:scale-105" />
+        {portfolioData.map((project, index) => {
+          const isSelected = activeSlug === project.slug;
+          return (
+            <div 
+              onClick={() => {
+                setActiveSlug(isSelected ? null : project.slug);
+                setActiveSubId(null);
+                // ক্লিক করার পর সাব-কন্টেন্টে স্মুথ স্ক্রোলের জন্য জাস্ট একটা ডিলে ট্রিগার
+                if (!isSelected) {
+                  setTimeout(() => {
+                    document.getElementById('vault-section')?.scrollIntoView({ behavior: 'smooth' });
+                  }, 100);
+                }
+              }}
+              key={index} 
+              className={`cursor-pointer rounded-xl p-5 border transition-all duration-300 block text-left ${
+                isSelected ? 'bg-[#151522] border-brand-neon shadow-glow' : 'bg-[#12121A] border-white/5 hover:border-brand-neon/40'
+              }`}
+            >
+              <span className="text-[10px] font-bold text-gray-500 tracking-widest block mb-4 uppercase">{project.tag}</span>
+              <div className="w-full aspect-[4/3] bg-[#0B0B0F] rounded-lg mb-5 flex items-center justify-center border border-white/5 relative overflow-hidden group">
+                <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-80 transition-all duration-300 group-hover:scale-105" />
+              </div>
+              <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
+              <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
             </div>
-            <h3 className="text-white font-black text-lg tracking-wide uppercase">{project.title}</h3>
-            <p className="text-xs text-brand-neon mt-0.5 uppercase tracking-wider font-semibold">{project.category}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* 🔓 সেকশন ২: ডাইনামিক সাব-কার্ড গ্রিড */}
       <div id="vault-section" className="scroll-mt-24">
         <AnimatePresence mode="wait">
           {activeSlug && currentProject && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/10 pt-16">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              exit={{ opacity: 0 }} 
+              className="max-w-7xl mx-auto border-t border-white/10 pt-16"
+            >
               <div className="text-left mb-10">
                 <h3 className="text-3xl font-black text-white tracking-tight uppercase">{currentProject.title} VAULT</h3>
                 <p className="text-gray-400 text-sm mt-2 font-light max-w-3xl">{currentProject.subDesc}</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentProject.subCategories.map((sub) => (
-                  <div 
-                    key={sub.id}
-                    onClick={() => {
-                      if (sub.videoUrl) {
-                        setVideoPlayUrl(sub.videoUrl);
-                      } else {
-                        setActiveSubId(activeSubId === sub.id ? null : sub.id);
-                      }
-                    }}
-                    className={`group bg-[#12121A] border rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center relative overflow-hidden w-full aspect-[3/2] ${
-                      activeSubId === sub.id ? 'border-brand-neon shadow-glow' : 'border-white/5 hover:border-brand-purple/40'
-                    }`}
-                  >
-                    <img src={sub.cover} alt={sub.name} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition duration-300" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0B0B0F]/90 z-10 flex flex-col items-center justify-end pb-5">
-                      <h4 className="text-white text-base font-black tracking-wider uppercase px-2 text-center drop-shadow-md">{sub.name}</h4>
-                      <span className="text-[10px] text-brand-purple font-bold uppercase mt-0.5 tracking-widest">
-                        {sub.videoUrl ? "🎬 WATCH VIDEO" : sub.label}
-                      </span>
+              {currentProject.subCategories.length === 0 ? (
+                <div className="text-left py-10 border border-dashed border-white/10 rounded-xl px-6 bg-[#12121A]">
+                  <p className="text-gray-500 text-sm">No items uploaded under this category yet. Upload items via Sanity Dashboard to view them live!</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentProject.subCategories.map((sub) => (
+                    <div 
+                      key={sub.id}
+                      onClick={() => {
+                        if (sub.videoUrl) {
+                          setVideoPlayUrl(sub.videoUrl);
+                        } else {
+                          setActiveSubId(activeSubId === sub.id ? null : sub.id);
+                        }
+                      }}
+                      className={`group bg-[#12121A] border rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center relative overflow-hidden w-full aspect-[3/2] ${
+                        activeSubId === sub.id ? 'border-brand-neon shadow-glow' : 'border-white/5 hover:border-brand-purple/40'
+                      }`}
+                    >
+                      <img src={sub.cover} alt={sub.name} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0B0B0F]/90 z-10 flex flex-col items-center justify-end pb-5">
+                        <h4 className="text-white text-base font-black tracking-wider uppercase px-2 text-center drop-shadow-md">{sub.name}</h4>
+                        <span className="text-[10px] text-brand-purple font-bold uppercase mt-0.5 tracking-widest">
+                          {sub.videoUrl ? "🎬 WATCH VIDEO" : sub.label}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
@@ -210,30 +220,43 @@ export default function PortfolioGrid() {
       {/* 🔓 সেকশন ৩: সাব-কার্ডের ভেতরের ইমেজ গ্যালারি */}
       <div className="mt-16">
         <AnimatePresence mode="wait">
-          {activeSubId && currentSub && currentSub.nestedImages.length > 0 && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/5 pt-12">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {currentSub.nestedImages.map((imgObj, idx) => (
-                  <div 
-                    key={idx}
-                    onClick={() => setLightboxIndex(idx)}
-                    className="group bg-[#161622] border border-white/5 hover:border-brand-neon/40 rounded-xl overflow-hidden cursor-pointer aspect-[4/3] relative shadow-lg"
-                  >
-                    <img src={imgObj.src} alt={imgObj.name} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition duration-300" />
+          {activeSubId && currentProject && (
+            (() => {
+              const currentSub = currentProject.subCategories.find(s => s.id === activeSubId);
+              if (!currentSub || !currentSub.nestedImages || currentSub.nestedImages.length === 0) return null;
+              
+              return (
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/5 pt-12">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {currentSub.nestedImages.map((imgObj, idx) => (
+                      <div 
+                        key={idx}
+                        onClick={() => setLightboxIndex(idx)}
+                        className="group bg-[#161622] border border-white/5 hover:border-brand-neon/40 rounded-xl overflow-hidden cursor-pointer aspect-[4/3] relative shadow-lg"
+                      >
+                        <img src={imgObj.src} alt={imgObj.name} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition duration-300" />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </motion.div>
+                </motion.div>
+              );
+            })()
           )}
         </AnimatePresence>
       </div>
 
       {/* Lightbox & Video Modals */}
       <AnimatePresence>
-        {lightboxIndex !== null && currentSub && (
-          <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
-            <img src={currentSub.nestedImages[lightboxIndex].src} alt="Preview" className="max-w-full max-h-[85vh] object-contain rounded-lg" />
-          </div>
+        {lightboxIndex !== null && activeSlug && (
+          (() => {
+            const currentSub = portfolioData.find(p => p.slug === activeSlug)?.subCategories.find(s => s.id === activeSubId);
+            if (!currentSub || !currentSub.nestedImages[lightboxIndex]) return null;
+            return (
+              <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
+                <img src={currentSub.nestedImages[lightboxIndex].src} alt="Preview" className="max-w-full max-h-[85vh] object-contain rounded-lg" />
+              </div>
+            );
+          })()
         )}
         {videoPlayUrl && (
           <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4" onClick={() => setVideoPlayUrl(null)}>
