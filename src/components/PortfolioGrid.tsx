@@ -16,14 +16,20 @@ interface NestedImage {
   src: string;
 }
 
+interface VideoItem {
+  title: string;
+  videoType: 'url' | 'file';
+  videoUrl?: string;
+  videoFileUrl?: string;
+  cover?: string;
+}
+
 interface SubCategory {
   id: string;
   name: string;
   label: string;
   cover: string;
-  videoType: 'none' | 'url' | 'file';
-  videoUrl?: string;
-  videoFileUrl?: string;
+  videosList: VideoItem[];
   nestedImages: NestedImage[];
 }
 
@@ -48,10 +54,7 @@ export default function PortfolioGrid() {
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [activeSubId, setActiveSubId] = useState<string | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  
-  // ভিডিও প্লেব্যাক স্টেটস
   const [activeVideoSource, setActiveVideoSource] = useState<{ type: 'url' | 'file'; src: string } | null>(null);
-  
   const [portfolioData, setPortfolioData] = useState<MainProject[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -64,9 +67,13 @@ export default function PortfolioGrid() {
           mainCategory,
           label,
           "cover": cover.asset->url,
-          videoType,
-          videoUrl,
-          "videoFileUrl": videoFile.asset->url,
+          videosList[]{
+            "title": videoTitle,
+            videoType,
+            videoUrl,
+            "videoFileUrl": videoFile.asset->url,
+            "cover": itemCover.asset->url
+          },
           nestedImages[]{
             "name": name,
             "src": asset->url
@@ -87,11 +94,9 @@ export default function PortfolioGrid() {
             .map((item: any) => ({
               id: item._id,
               name: item.title,
-              label: item.label || "Asset Component",
+              label: item.label || "Asset Pack",
               cover: item.cover || section.image,
-              videoType: item.videoType || 'none',
-              videoUrl: item.videoUrl || "",
-              videoFileUrl: item.videoFileUrl || "",
+              videosList: item.videosList || [],
               nestedImages: item.nestedImages || []
             }));
 
@@ -109,8 +114,7 @@ export default function PortfolioGrid() {
         setLoading(false);
       } catch (error) {
         console.error("Sanity Fetch Error:", error);
-        const fallbackData = mainSectionsConfig.map(section => ({ ...section, subCategories: [] }));
-        setPortfolioData(fallbackData);
+        setPortfolioData(mainSectionsConfig.map(s => ({ ...s, subCategories: [] })));
         setLoading(false);
       }
     };
@@ -119,21 +123,17 @@ export default function PortfolioGrid() {
   }, []);
 
   const currentProject = portfolioData.find(p => p.slug === activeSlug);
+  const currentSub = currentProject?.subCategories.find(s => s.id === activeSubId);
 
-  // ইউটিউব লিংক পার্স করার হেল্পার
   const getEmbedUrl = (url: string) => {
-    if (url.includes('youtube.com/watch?v=')) {
-      return url.replace('watch?v=', 'embed/');
-    }
-    if (url.includes('youtu.be/')) {
-      const id = url.split('/').pop();
-      return `https://www.youtube.com/embed/${id}`;
-    }
+    if (url.includes('youtube.com/watch?v=')) return url.replace('watch?v=', 'embed/');
+    if (url.includes('youtu.be/')) return `https://www.youtube.com/embed/${url.split('/').pop()}`;
     return url;
   };
 
   return (
     <section className="w-full py-24 bg-[#0B0B0F] px-6 select-none relative" id="portfolio">
+      
       <div className="max-w-7xl mx-auto text-center mb-16">
         <span className="text-xs font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-neon uppercase">Live Studio Vault</span>
         <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight mt-3">
@@ -172,7 +172,7 @@ export default function PortfolioGrid() {
         })}
       </div>
 
-      {/* 🔓 সেকশন ২: সাব-কার্ড গ্রিড */}
+      {/* 🔓 সেকশন ২: সাব-কার্ড গ্রিড (গ্রুপ কালেকশন যেমন: Ads, Thumbnails) */}
       <div id="vault-section" className="scroll-mt-24">
         <AnimatePresence mode="wait">
           {activeSlug && currentProject && (
@@ -191,15 +191,7 @@ export default function PortfolioGrid() {
                   {currentProject.subCategories.map((sub) => (
                     <div 
                       key={sub.id}
-                      onClick={() => {
-                        if (sub.videoType === 'url' && sub.videoUrl) {
-                          setActiveVideoSource({ type: 'url', src: sub.videoUrl });
-                        } else if (sub.videoType === 'file' && sub.videoFileUrl) {
-                          setActiveVideoSource({ type: 'file', src: sub.videoFileUrl });
-                        } else {
-                          setActiveSubId(activeSubId === sub.id ? null : sub.id);
-                        }
-                      }}
+                      onClick={() => setActiveSubId(activeSubId === sub.id ? null : sub.id)}
                       className={`group bg-[#12121A] border rounded-xl p-4 transition duration-300 cursor-pointer text-center flex flex-col items-center justify-center relative overflow-hidden w-full aspect-[3/2] ${
                         activeSubId === sub.id ? 'border-brand-neon shadow-glow' : 'border-white/5 hover:border-brand-purple/40'
                       }`}
@@ -208,7 +200,7 @@ export default function PortfolioGrid() {
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0B0B0F]/90 z-10 flex flex-col items-center justify-end pb-5">
                         <h4 className="text-white text-base font-black tracking-wider uppercase px-2 text-center drop-shadow-md">{sub.name}</h4>
                         <span className="text-[10px] text-brand-purple font-bold uppercase mt-0.5 tracking-widest">
-                          {sub.videoType !== 'none' ? "🎬 WATCH VIDEO" : sub.label}
+                          {sub.videosList.length > 0 ? `🎬 VIEW ${sub.videosList.length} VIDEOS` : sub.label}
                         </span>
                       </div>
                     </div>
@@ -220,53 +212,64 @@ export default function PortfolioGrid() {
         </AnimatePresence>
       </div>
 
-      {/* 🔓 সেকশন ৩: ইমেজ গ্যালারি (যদি ভিডিও না হয়ে সাধারণ ইমেজ প্রজেক্ট হয়) */}
+      {/* 🔓 সেকশন ৩: ভিডিও বা ইমেজ প্লেব্যাক গ্রিড (আনলিমিটেড ভিডিওর তালিকা এখানে রেন্ডার হবে) */}
       <div className="mt-16">
         <AnimatePresence mode="wait">
-          {activeSubId && currentProject && (
-            (() => {
-              const currentSub = currentProject.subCategories.find(s => s.id === activeSubId);
-              if (!currentSub || !currentSub.nestedImages || currentSub.nestedImages.length === 0) return null;
+          {activeSubId && currentProject && currentSub && (
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/5 pt-12">
               
-              return (
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-7xl mx-auto border-t border-white/5 pt-12">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {currentSub.nestedImages.map((imgObj, idx) => (
-                      <div 
-                        key={idx}
-                        onClick={() => setLightboxIndex(idx)}
-                        className="group bg-[#161622] border border-white/5 hover:border-brand-neon/40 rounded-xl overflow-hidden cursor-pointer aspect-[4/3] relative shadow-lg"
-                      >
-                        <img src={imgObj.src} alt={imgObj.name} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition duration-300" />
+              {/* 🎬 যদি ভিডিও ফাইল বা লিংক থাকে */}
+              {currentSub.videosList && currentSub.videosList.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentSub.videosList.map((video, idx) => (
+                    <div 
+                      key={idx}
+                      onClick={() => {
+                        if (video.videoType === 'url' && video.videoUrl) setActiveVideoSource({ type: 'url', src: video.videoUrl });
+                        if (video.videoType === 'file' && video.videoFileUrl) setActiveVideoSource({ type: 'file', src: video.videoFileUrl });
+                      }}
+                      className="group bg-[#12121A] border border-white/5 hover:border-brand-neon/40 rounded-xl overflow-hidden cursor-pointer aspect-[16/10] relative shadow-lg flex flex-col justify-end p-4"
+                    >
+                      <img src={video.cover || currentSub.cover} alt={video.title} className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-70 transition duration-300" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-12 h-12 rounded-full bg-brand-purple/80 text-white flex items-center justify-center text-lg shadow-md group-hover:scale-110 transition duration-300">▶</div>
                       </div>
-                    ))}
-                  </div>
-                </motion.div>
-              );
-            })()
+                      <div className="relative z-10 bg-gradient-to-t from-black/80 to-transparent p-2 rounded-b-xl w-full text-left">
+                        <h5 className="text-white font-bold text-sm uppercase tracking-wide truncate">{video.title}</h5>
+                        <span className="text-[9px] text-brand-neon font-mono uppercase">{video.videoType === 'url' ? 'YOUTUBE' : 'MP4 FILE'}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* 🖼️ যদি কোনো ইমেজ গ্যালারি প্রজেক্ট হয় */}
+              {currentSub.nestedImages && currentSub.nestedImages.length > 0 && currentSub.videosList.length === 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentSub.nestedImages.map((imgObj, idx) => (
+                    <div key={idx} onClick={() => setLightboxIndex(idx)} className="group bg-[#161622] border border-white/5 hover:border-brand-neon/40 rounded-xl overflow-hidden cursor-pointer aspect-[4/3] relative shadow-lg">
+                      <img src={imgObj.src} alt={imgObj.name} className="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition duration-300" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* 🎬 ডাইনামিক লাইটবক্স ও ভিডিও মোডাল প্লেয়ার */}
+      {/* Lightbox & Video Player Modals */}
       <AnimatePresence>
-        {lightboxIndex !== null && activeSlug && (
-          (() => {
-            const currentSub = portfolioData.find(p => p.slug === activeSlug)?.subCategories.find(s => s.id === activeSubId);
-            if (!currentSub || !currentSub.nestedImages[lightboxIndex]) return null;
-            return (
-              <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
-                <img src={currentSub.nestedImages[lightboxIndex].src} alt="Preview" className="max-w-full max-h-[85vh] object-contain rounded-lg" />
-              </div>
-            );
-          })()
+        {lightboxIndex !== null && activeSlug && currentSub && currentSub.nestedImages[lightboxIndex] && (
+          <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4" onClick={() => setLightboxIndex(null)}>
+            <img src={currentSub.nestedImages[lightboxIndex].src} alt="Preview" className="max-w-full max-h-[85vh] object-contain rounded-lg" />
+          </div>
         )}
         
         {activeVideoSource && (
-          <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4 animate-fadeIn" onClick={() => setActiveVideoSource(null)}>
+          <div className="fixed inset-0 bg-black/95 z-[999] flex items-center justify-center p-4" onClick={() => setActiveVideoSource(null)}>
             <div className="w-full max-w-4xl aspect-video rounded-xl overflow-hidden border border-white/10 bg-black relative" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setActiveVideoSource(null)} className="absolute top-4 right-4 text-white text-xl bg-black/50 p-2 rounded-full z-50 hover:bg-white/20">✕</button>
-              
+              <button onClick={() => setActiveVideoSource(null)} className="absolute top-4 right-4 text-white text-xl bg-black/50 w-8 h-8 rounded-full z-50 hover:bg-white/20">✕</button>
               {activeVideoSource.type === 'url' ? (
                 <iframe src={getEmbedUrl(activeVideoSource.src)} className="w-full h-full" allow="autoplay; fullscreen" allowFullScreen></iframe>
               ) : (
