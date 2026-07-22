@@ -42,7 +42,7 @@ export default function ClientLogosClient({ logos }: { logos: ClientLogoType[] }
               <img
                 src={client.logoUrl}
                 alt={client.name}
-                className="max-h-10 max-w-[120px] object-contain transition-all duration-300 brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110"
+                className="max-h-10 max-w-[120px] object-contain transition-all duration-150 brightness-0 invert opacity-40 group-hover:opacity-100 group-hover:scale-110"
               />
             </div>
           ))}
