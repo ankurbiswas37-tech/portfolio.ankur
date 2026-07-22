@@ -189,6 +189,7 @@ function CheckoutContent() {
 
     try {
       // 1. Post Order Data to Sanity API Route
+      // ---> এই লাইনটি আপডেট করা হয়েছে <---
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
