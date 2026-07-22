@@ -3,7 +3,6 @@
 import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import jsPDF from 'jspdf';
-// ১. packagesData, types import
 import { packagesData, PackageItem, ServiceItem } from '@/data/packagesData';
 
 interface PaymentSubOption {
@@ -25,8 +24,8 @@ interface PaymentDetailsConfig {
 function CheckoutContent() {
   const searchParams = useSearchParams();
   const packageId = searchParams.get('package') || 'visual-brand';
-  
-  const currentPackage: PackageItem = 
+
+  const currentPackage: PackageItem =
     packagesData.find((p: PackageItem) => p.id === packageId) || packagesData[0];
 
   const paymentDetailsConfig: PaymentDetailsConfig = {
@@ -66,6 +65,9 @@ function CheckoutContent() {
   const [activeMainCategory, setActiveMainCategory] = useState<'international' | 'crypto' | 'local'>('international');
   const [activeSubGateway, setActiveSubGateway] = useState<string>('payoneer');
 
+  // Loading state
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   // Form input states for Invoice
   const [trxId, setTrxId] = useState<string>('');
   const [senderAccount, setSenderAccount] = useState<string>('');
@@ -80,7 +82,7 @@ function CheckoutContent() {
   const currentSelectedData = paymentDetailsConfig[activeMainCategory][activeSubGateway];
 
   // Dynamic PDF Invoice Generator Function
-  const generatePDFInvoice = () => {
+  const generatePDFInvoice = (orderId?: string) => {
     const doc = new jsPDF();
 
     // 1. Header & Brand Title
@@ -94,7 +96,7 @@ function CheckoutContent() {
 
     // Invoice Meta
     const dateStr = new Date().toLocaleDateString();
-    const invoiceNo = `INV-${Math.floor(100000 + Math.random() * 900000)}`;
+    const invoiceNo = orderId || `INV-${Math.floor(100000 + Math.random() * 900000)}`;
     doc.setFontSize(10);
     doc.setTextColor(80);
     doc.text(`Date: ${dateStr}`, 150, 20);
@@ -180,11 +182,49 @@ function CheckoutContent() {
     doc.save(`Invoice_${currentPackage.id}${cleanTrx}.pdf`);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  // ✅ Fixed Async API Submission Logic
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Payment info submitted successfully!');
-    // Trigger PDF download
-    generatePDFInvoice();
+    setIsSubmitting(true);
+
+    try {
+      // 1. Post Order Data to Sanity API Route
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          packageId: currentPackage.id,
+          packageTitle: currentPackage.title,
+          amount: currentPackage.totalUSD || currentPackage.price,
+          paymentCategory: activeMainCategory,
+          paymentMethod: currentSelectedData?.label,
+          trxId,
+          senderAccount,
+          senderName,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        // 2. Trigger PDF Download with Generated Order ID
+        generatePDFInvoice(data.orderId);
+
+        alert('Payment info submitted successfully! Invoice downloading...');
+        
+        // Reset Inputs
+        setTrxId('');
+        setSenderAccount('');
+        setSenderName('');
+      } else {
+        alert(data.error || 'Submission failed! Please try again.');
+      }
+    } catch (err) {
+      console.error("Submission Error:", err);
+      alert('Something went wrong during submission.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -351,8 +391,12 @@ function CheckoutContent() {
           )}
         </div>
 
-        <button type="submit" className="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg transition-all duration-200">
-          Submit Payment & Download Invoice
+        <button 
+          type="submit" 
+          disabled={isSubmitting}
+          className="w-full bg-purple-600 hover:bg-purple-500 disabled:bg-purple-800 disabled:cursor-not-allowed text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg transition-all duration-200"
+        >
+          {isSubmitting ? "Submitting Order..." : "Submit Payment & Download Invoice"}
         </button>
       </form>
     </div>
