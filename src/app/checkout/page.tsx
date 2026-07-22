@@ -2,7 +2,8 @@
 
 import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { packagesData } from '@/data/packages';
+// ১. ঠিক করা হয়েছে: packagesData ফাইল ইম্পোর্ট
+import { packagesData, PackageItem, ServiceItem } from '@/data/packagesData';
 
 interface PaymentSubOption {
   label: string;
@@ -24,8 +25,9 @@ function CheckoutContent() {
   const searchParams = useSearchParams();
   const packageId = searchParams.get('package') || 'visual-brand';
   
-  // Array find() দিয়ে নির্বাচিত ID এর প্যাকেজ খোঁজা হচ্ছে
-  const currentPackage = packagesData.find((p) => p.id === packageId) || packagesData[0];
+  // ২. ঠিক করা হয়েছে: 'p' এর টাইপ (p: PackageItem) নির্দিষ্ট করা হয়েছে
+  const currentPackage: PackageItem = 
+    packagesData.find((p: PackageItem) => p.id === packageId) || packagesData[0];
 
   const paymentDetailsConfig: PaymentDetailsConfig = {
     international: {
@@ -151,7 +153,8 @@ function CheckoutContent() {
         <h3 className="text-sm font-semibold text-gray-300 mb-3 border-b border-slate-800 pb-2">Order Summary</h3>
         <div className="space-y-2 text-sm text-gray-400">
           {currentPackage.services && currentPackage.services.length > 0 ? (
-            currentPackage.services.map((item, index) => (
+            // ৩ & ৪. ঠিক করা হয়েছে: (item: ServiceItem, index: number) টাইপ সেট করা হয়েছে
+            currentPackage.services.map((item: ServiceItem, index: number) => (
               <div key={index} className="flex justify-between items-center">
                 <span>{item.name}</span>
                 <span className="font-medium text-gray-200">${item.price.toFixed(2)}</span>
