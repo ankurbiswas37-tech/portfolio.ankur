@@ -45,17 +45,18 @@ export default function PricingModals({ selectedPackage, onClose }: ModalProps) 
     }
   };
 
-  // Payment Proceed Handler
+  // Payment Proceed Handler (UPDATE: ID & Slug handling added)
   const handleProceedPayment = () => {
-  // সিলেক্ট করা প্যাকেজ এবং পেমেন্ট মেথড নিয়ে পেমেন্ট পেজে নিয়ে যাবে
-  const queryParams = new URLSearchParams({
-    package: selectedPackage.title,
-    price: selectedPackage.price || '',
-    method: selectedMethod,
-  }).toString();
+    // selectedPackage.id অথবা slug থাকলে সেটা পাঠাবে, না থাকলে title পাঠাবে
+    const packageKey = selectedPackage.id || selectedPackage.slug || selectedPackage.title;
 
-  window.location.href = `/checkout?${queryParams}`;
-};
+    const queryParams = new URLSearchParams({
+      package: packageKey,
+      method: selectedMethod,
+    }).toString();
+
+    window.location.href = `/checkout?${queryParams}`;
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
