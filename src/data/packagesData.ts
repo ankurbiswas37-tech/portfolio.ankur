@@ -18,6 +18,22 @@ export interface PackageItem {
   totalUSD?: string;
 }
 
+// Order Interface for dynamic backend/database operations
+export interface Order {
+  _id?: string;
+  orderId: string;
+  packageId: string;
+  packageTitle: string;
+  amount: string;
+  paymentCategory: 'international' | 'crypto' | 'local';
+  paymentMethod: string;
+  trxId?: string;
+  senderAccount?: string;
+  senderName?: string;
+  status: 'pending' | 'approved' | 'rejected';
+  createdAt: string;
+}
+
 export const packagesData: PackageItem[] = [
   {
     id: 'visual-brand',
