@@ -5,6 +5,7 @@ import ClientLogos from "@/components/ClientLogos"; // 👈 ১. ClientLogos ক
 import Testimonials from "@/components/Testimonials";
 import PortfolioGrid from "@/components/PortfolioGrid";
 import About from '@/components/About';
+import PricingSection from '@/components/PricingSection';
 import Faq from "@/components/Faq";
 import ContactAndFooter from "@/components/ContactAndFooter";
 
@@ -27,6 +28,8 @@ export default function Home() {
         
         {/* 👤 অ্যাবাউট সেকশন */}
         <About />
+
+        <PricingSection />
 
         {/* ❓ Start Your Project এর ঠিক ওপরে FAQ সেকশন */}
         <Faq />
