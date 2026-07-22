@@ -31,7 +31,7 @@ export default function ClientLogosClient({ logos }: { logos: ClientLogoType[] }
           transition={{
             repeat: Infinity,
             ease: "linear",
-            duration: 15,
+            duration: 40,
           }}
         >
           {duplicatedLogos.map((client, index) => (
